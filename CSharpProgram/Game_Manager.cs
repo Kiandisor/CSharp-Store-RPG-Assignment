@@ -41,9 +41,9 @@ namespace Store_RPG_Assignment {
                 CurrentState = GameState.Menu;
 
             }
-            
+
             //If there is a name then go straight to the menu
-            else { 
+            else {
                 CurrentState = GameState.Menu;
             }
         }
@@ -54,7 +54,7 @@ namespace Store_RPG_Assignment {
         public void RunMenu() {
 
             //Run the game while the current state is menu 
-            while (CurrentState == GameState.Menu ) {
+            while (CurrentState == GameState.Menu) {
                 Console.Clear();
                 StartMenu.ShowMainMenu();
 
@@ -87,7 +87,7 @@ namespace Store_RPG_Assignment {
 
                     case "exit":
                         //Quit the game
-                        
+
                         break;
 
                     default:
@@ -106,32 +106,23 @@ namespace Store_RPG_Assignment {
 
             //Run the trade menu while the gamestate is trade
             while (CurrentState == GameState.Trade) {
-                TradeMenu.ShowTradeMenu();
+                TradeMenu.ShowSelectInventoryMenu();
 
                 //Switch for the trade menu choice
                 switch (TradeMenu.ReturnTradeUserChoice()) {
 
-                    case "art book":
-                        TradeMenu.ChangeInventories(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
+                    case "to":
+                        CurrentState = GameState.ToShop;
+                        ToTheStoreInventory();
                         break;
 
-                    case "c# book":
-                        TradeMenu.ChangeInventories(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
-                        break;
-
-                    case "medic book":
-                        TradeMenu.ChangeInventories(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
-                        break;
-
-                    case "note book":
-                        TradeMenu.ChangeInventories(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
+                    case "from":
+                        CurrentState = GameState.ToPlayer;
+                        ToThePlayerInventory();
                         break;
 
                     case "menu":
-                        Console.Clear();
                         CurrentState = GameState.Menu;
-                        break;
-                    default:
                         Console.Clear();
                         break;
                 }
@@ -215,6 +206,71 @@ namespace Store_RPG_Assignment {
         /// Manages how to exit the game
         /// </summary>
         public void RunExitGame() { }
-                                    
+
+        public void ToThePlayerInventory() {
+            while (CurrentState == GameState.ToPlayer) {
+                TradeMenu.ShowTradeMenu();
+
+                //Switch for the trade menu choice
+                switch (TradeMenu.ReturnTradeUserChoice()) {
+                    case "art book":
+                        TradeMenu.ChangeShopInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
+                        break;
+
+                    case "c# book":
+                        TradeMenu.ChangeShopInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
+                        break;
+
+                    case "medic book":
+                        TradeMenu.ChangeShopInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
+                        break;
+
+                    case "note book":
+                        TradeMenu.ChangeShopInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
+                        break;
+
+                    case "menu":
+                        Console.Clear();
+                        CurrentState = GameState.Menu;
+                        break;
+                    default:
+                        Console.Clear();
+                        break;
+                }
+            }
+        }
+
+        public void ToTheStoreInventory() {
+            while (CurrentState == GameState.ToShop) {
+                TradeMenu.ShowTradeMenu();
+
+                //Switch for the trade menu choice
+                switch (TradeMenu.ReturnTradeUserChoice()) {
+                    case "art book":
+                        TradeMenu.ChangePlayerInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
+                        break;
+
+                    case "c# book":
+                        TradeMenu.ChangePlayerInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
+                        break;
+
+                    case "medic book":
+                        TradeMenu.ChangePlayerInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
+                        break;
+
+                    case "note book":
+                        TradeMenu.ChangePlayerInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
+                        break;
+
+                    case "menu":
+                        Console.Clear();
+                        CurrentState = GameState.Menu;
+                        break;
+                    default:
+                        Console.Clear();
+                        break;
+                }
+            }
+        }
     }
 }
