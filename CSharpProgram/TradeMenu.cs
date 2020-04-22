@@ -83,23 +83,27 @@ namespace Store_RPG_Assignment {
         /// <param name="StoreChange"></param>
         public void ChangeInventories(List<Inventory_Item> PlayerChange, List<Inventory_Item> StoreChange, int ChangeAmount) {
 
+            foreach (var StoreValueChange in StoreChange) {
+
+                if (TradeUserChoice == StoreValueChange.Item_Name) {
+                    if (ChangeAmount <= StoreValueChange.Item_Amount) {
+                        StoreValueChange.Item_Amount -= ChangeAmount;
+                    }
+
+                    else {
+                        ChangeAmount = StoreValueChange.Item_Amount;
+
+                        StoreValueChange.Item_Amount -= StoreValueChange.Item_Amount;
+                    }
+                }
+            }
+
             //Check each item in the inventory until the user choice is the same as the inventory item
             foreach (var ItemValueChange in PlayerChange) {
 
                 if (TradeUserChoice == ItemValueChange.Item_Name) {
 
                     ItemValueChange.Item_Amount += ChangeAmount;
-
-                }
-
-            }
-
-            foreach (var StoreValueChange in StoreChange) {
-
-                if (TradeUserChoice == StoreValueChange.Item_Name) {
-
-                    StoreValueChange.Item_Amount -= ChangeAmount;
-
                 }
             }
         }
