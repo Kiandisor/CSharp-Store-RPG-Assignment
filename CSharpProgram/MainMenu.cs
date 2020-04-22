@@ -56,7 +56,7 @@ namespace Store_RPG_Assignment {
         /// Print out the main menu and get the user input
         /// </summary>
         public void ShowMainMenu() {
-            Console.WriteLine($"Welcome to the trading game {PlayerName}!");
+            Console.WriteLine($"Welcome to the trading game, {PlayerName}!");
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("- Trade with the shop (trade)");
             Console.WriteLine("- View your Inventory (inventory)");

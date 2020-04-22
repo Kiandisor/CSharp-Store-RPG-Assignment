@@ -109,7 +109,7 @@ namespace Store_RPG_Assignment {
                 TradeMenu.ShowSelectInventoryMenu();
 
                 //Switch for the trade menu choice
-                switch (TradeMenu.ReturnTradeUserChoice()) {
+                switch (TradeMenu.ReturnTradeMenuChoice()) {
 
                     case "to":
                         CurrentState = GameState.ToShop;
@@ -207,6 +207,9 @@ namespace Store_RPG_Assignment {
         /// </summary>
         public void RunExitGame() { }
 
+        /// <summary>
+        /// Menu to trade items from the store inventory to the players
+        /// </summary>
         public void ToThePlayerInventory() {
             while (CurrentState == GameState.ToPlayer) {
                 TradeMenu.ShowTradeMenu();
@@ -240,6 +243,9 @@ namespace Store_RPG_Assignment {
             }
         }
 
+        /// <summary>
+        /// Menu to trade items from the players inventory to the stores
+        /// </summary>
         public void ToTheStoreInventory() {
             while (CurrentState == GameState.ToShop) {
                 TradeMenu.ShowTradeMenu();

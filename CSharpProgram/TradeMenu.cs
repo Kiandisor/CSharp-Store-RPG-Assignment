@@ -7,8 +7,11 @@ namespace Store_RPG_Assignment {
     /// </summary>
     class Trading_Menu {
 
-        //String for the user choice
+        //String for the user choice for the items
         string TradeUserChoice = "";
+
+        //String for the user choice to which inventory to trade to
+        string TradeMenuChoice = "";
 
         //Int for the amount to add or subtract from the inventory
         int ChangeAmount = 0;
@@ -21,8 +24,9 @@ namespace Store_RPG_Assignment {
             Console.WriteLine("Would you like to trade to the store or from it?");
             Console.WriteLine("- To the store (to)");
             Console.WriteLine("- From the store (from)");
+            Console.WriteLine("- Back to menu (menu)");
             
-            TradeUserChoice = Console.ReadLine().ToLower();
+            TradeMenuChoice = Console.ReadLine().ToLower();
         }
 
         /// <summary>
@@ -30,7 +34,7 @@ namespace Store_RPG_Assignment {
         /// </summary>
         public void ShowTradeMenu() {
             Console.WriteLine("Welcome to the store!");
-            Console.WriteLine("What would you like to trade?");
+            Console.WriteLine($"What would you like to trade {TradeMenuChoice} the store?");
             Console.WriteLine("- Art Book");
             Console.WriteLine("- C# Book");
             Console.WriteLine("- Medic Book");
@@ -47,6 +51,16 @@ namespace Store_RPG_Assignment {
         public string ReturnTradeUserChoice() {
             
             return TradeUserChoice;
+
+        }
+
+        /// <summary>
+        /// Returns the user choice for which inventory to trade to menu
+        /// </summary>
+        /// <returns></returns>
+        public string ReturnTradeMenuChoice() {
+
+            return TradeMenuChoice;
 
         }
 
@@ -161,17 +175,17 @@ namespace Store_RPG_Assignment {
                     if (PlayerValueChange.Item_Amount != 0) {
                         if (ChangeAmount <= PlayerValueChange.Item_Amount) {
                             PlayerValueChange.Item_Amount -= ChangeAmount;
-                            Console.WriteLine($"You have traded for {ChangeAmount} {TradeUserChoice}");
+                            Console.WriteLine($"You traded to the shop {ChangeAmount} {TradeUserChoice}(s)");
                         }
 
                         //If you trade more than the shop has but the shop has the item, take the rest of the amount and 
                         else {
 
-                            Console.WriteLine($"You wanted to trade {ChangeAmount} {TradeUserChoice} but the shop only had {PlayerValueChange.Item_Amount}.");
+                            Console.WriteLine($"You wanted to trade {ChangeAmount} {TradeUserChoice} to the shop but only had {PlayerValueChange.Item_Amount}.");
 
                             ChangeAmount = PlayerValueChange.Item_Amount;
 
-                            Console.WriteLine($"You ended up trading for the rest of their stock instead ({ChangeAmount}).");
+                            Console.WriteLine($"You ended up trading for the rest the {TradeUserChoice}(s) instead ({ChangeAmount}).");
 
                             PlayerValueChange.Item_Amount -= PlayerValueChange.Item_Amount;
 
@@ -182,7 +196,7 @@ namespace Store_RPG_Assignment {
                     //Tell the user the item is out of stock if there is none left
                     else {
                         Console.Clear();
-                        Console.WriteLine($"The {TradeUserChoice} is currently out of stock.");
+                        Console.WriteLine($"You don't have any {TradeUserChoice} in your inventory.");
                         Console.WriteLine();
                     }
                 }
