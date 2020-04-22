@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Store_RPG_Assignment {
 
+    /// <summary>
+    /// Base class for making an item
+    /// </summary>
     class Inventory_Item {
 
         //Variables for an item
@@ -18,6 +21,9 @@ namespace Store_RPG_Assignment {
 
     }
 
+    /// <summary>
+    /// Holds the main functions to controlling the player and store inventory
+    /// </summary>
     class Base_Inventory {
 
         /// <summary>
