@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Store_RPG_Assignment {
 
     /// <summary>
-    /// Functions to accsess the user/player inventory
+    /// The player inventory with functions inherited from the base inventory functions
     /// </summary>
     class Player_Inventory_List : Base_Inventory {
 
