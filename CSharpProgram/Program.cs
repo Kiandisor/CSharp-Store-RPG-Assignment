@@ -35,8 +35,7 @@ namespace Store_RPG_Assignment {
 
                     case Game_Manager.GameState.Exit:
                         PlayGame.RunExitGame();
-                        break;
-                
+                        break;             
                 }
             }
         }

@@ -160,7 +160,6 @@ namespace Store_RPG_Assignment {
                         Console.Clear();
                         CurrentState = GameState.Menu;
                         break;
-
                 }
             }
         }
@@ -197,7 +196,6 @@ namespace Store_RPG_Assignment {
                         Console.Clear();
                         CurrentState = GameState.Menu;
                         break;
-
                 }
             }
         }

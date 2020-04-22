@@ -51,7 +51,6 @@ namespace Store_RPG_Assignment {
         public string ReturnTradeUserChoice() {
             
             return TradeUserChoice;
-
         }
 
         /// <summary>
@@ -61,7 +60,6 @@ namespace Store_RPG_Assignment {
         public string ReturnTradeMenuChoice() {
 
             return TradeMenuChoice;
-
         }
 
         /// <summary>
@@ -71,8 +69,7 @@ namespace Store_RPG_Assignment {
         /// <returns></returns>
         public int TradeItemAmount(int amount) {
 
-            return amount;
-        
+            return amount;        
         }
 
         /// <summary>
@@ -97,6 +94,7 @@ namespace Store_RPG_Assignment {
 
             //If not keep running the function until the user enters a valid input
             else {
+
                 Console.WriteLine("That was not a valid input. Please enter a number.");
                 return GetAmount();
             }
@@ -211,6 +209,5 @@ namespace Store_RPG_Assignment {
                 }
             }
         }
-
-        }
     }
+}

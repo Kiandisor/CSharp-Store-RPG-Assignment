@@ -39,7 +39,6 @@ namespace Store_RPG_Assignment {
         public string ReturnName() {
 
             return PlayerName;
-
         }
 
         /// <summary>
@@ -49,7 +48,6 @@ namespace Store_RPG_Assignment {
         public string ReturnMenuUserChoice() {
 
             return MenuUserChoice;
-
         }
 
         /// <summary>

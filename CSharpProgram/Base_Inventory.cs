@@ -95,6 +95,5 @@ namespace Store_RPG_Assignment {
 
             ListToSort.Sort((x, y) => x.Item_Pages.CompareTo(y.Item_Pages));
         }
-
     }
 }
