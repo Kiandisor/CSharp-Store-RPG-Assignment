@@ -111,7 +111,9 @@ namespace Store_RPG_Assignment {
 
                     //Tell the user the item is out of stock if there is none left
                     else {
+                        Console.Clear();
                         Console.WriteLine($"The {TradeUserChoice} is currently out of stock.");
+                        Console.WriteLine();
                     }
                 }
             }
