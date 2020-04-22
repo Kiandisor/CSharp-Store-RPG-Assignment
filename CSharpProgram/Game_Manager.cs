@@ -16,9 +16,11 @@ namespace Store_RPG_Assignment {
             GetPlayerName, //0
             Menu, //1
             Trade, //2
-            PlayerInventoryMenu, //3
-            StoreInventoryMenu, //4
-            Exit //5
+            ToShop, //3
+            ToPlayer,//4
+            PlayerInventoryMenu, //5
+            StoreInventoryMenu, //6
+            Exit //7
         }
 
         /// <summary>
