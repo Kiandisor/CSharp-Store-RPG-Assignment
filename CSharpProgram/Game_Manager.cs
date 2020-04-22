@@ -121,13 +121,16 @@ namespace Store_RPG_Assignment {
                         TradeMenu.ChangeInventories(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
                         break;
 
-                    case "note  book":
+                    case "note book":
                         TradeMenu.ChangeInventories(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
                         break;
 
                     case "menu":
                         Console.Clear();
                         CurrentState = GameState.Menu;
+                        break;
+                    default:
+                        Console.Clear();
                         break;
                 }
             }

@@ -55,7 +55,7 @@ namespace Store_RPG_Assignment {
         /// <returns></returns>
         public int GetAmount() {
 
-            Console.WriteLine($"How many {TradeUserChoice}s would you like to buy?");
+            Console.WriteLine($"How many {TradeUserChoice}s would you like to trade?");
             
             //Gets the users amount
             string sChangeAmount = Console.ReadLine();
@@ -94,6 +94,7 @@ namespace Store_RPG_Assignment {
                     if (StoreValueChange.Item_Amount != 0) {
                         if (ChangeAmount <= StoreValueChange.Item_Amount) {
                             StoreValueChange.Item_Amount -= ChangeAmount;
+                            Console.WriteLine($"You have traded for {ChangeAmount} {TradeUserChoice}");
                         }
 
                         //If you trade more than the shop has but the shop has the item, take the rest of the amount and 
@@ -106,6 +107,8 @@ namespace Store_RPG_Assignment {
                             Console.WriteLine($"You ended up trading for the rest of their stock instead ({ChangeAmount}).");
 
                             StoreValueChange.Item_Amount -= StoreValueChange.Item_Amount;
+
+                            Console.WriteLine();
                         }
                     }
 
