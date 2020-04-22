@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSharpProgram {
+namespace Store_RPG_Assignment {
     class Game_Manager {
 
         //Initialise objects
@@ -175,26 +175,26 @@ namespace CSharpProgram {
         public void RunStoreInventory() {
             while (CurrentState == GameState.StoreInventoryMenu) {
 
-                StoreInventory.SortStoreListMenu();
+                StoreInventory.SortListMenu();
 
-                switch (StoreInventory.ReturnStoreSortInventory()) {
+                switch (StoreInventory.ReturnSortInventory()) {
 
                     case "amount":
                         Console.Clear();
                         StoreInventory.SortByAmountOwned(ref StoreInventory.Store_Stock_Inventory);
-                        StoreInventory.PrintStoreInventory(StoreInventory.Store_Stock_Inventory);
+                        StoreInventory.PrintInventory(StoreInventory.Store_Stock_Inventory);
                         break;
 
                     case "name":
                         Console.Clear();
                         StoreInventory.SortByItemName(ref StoreInventory.Store_Stock_Inventory);
-                        StoreInventory.PrintStoreInventory(StoreInventory.Store_Stock_Inventory);
+                        StoreInventory.PrintInventory(StoreInventory.Store_Stock_Inventory);
                         break;
 
                     case "pages":
                         Console.Clear();
                         StoreInventory.SortByItemPages(ref StoreInventory.Store_Stock_Inventory);
-                        StoreInventory.PrintStoreInventory(StoreInventory.Store_Stock_Inventory);
+                        StoreInventory.PrintInventory(StoreInventory.Store_Stock_Inventory);
                         break;
 
                     case "menu":

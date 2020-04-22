@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CSharpProgram {
+namespace Store_RPG_Assignment {
     /// <summary>
     /// Functions and variables for the trading menu
     /// </summary>
@@ -81,7 +81,7 @@ namespace CSharpProgram {
         /// </summary>
         /// <param name="PlayerChange"></param>
         /// <param name="StoreChange"></param>
-        public void ChangeInventories(List<Player_Inventory> PlayerChange, List<Store_Inventory> StoreChange, int ChangeAmount) {
+        public void ChangeInventories(List<Inventory_Item> PlayerChange, List<Inventory_Item> StoreChange, int ChangeAmount) {
 
             //Check each item in the inventory until the user choice is the same as the inventory item
             foreach (var ItemValueChange in PlayerChange) {

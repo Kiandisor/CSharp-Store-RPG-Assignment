@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CSharpProgram {
+namespace Store_RPG_Assignment {
 
     class Program {
         static void Main() {
