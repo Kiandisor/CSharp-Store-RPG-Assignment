@@ -83,17 +83,35 @@ namespace Store_RPG_Assignment {
         /// <param name="StoreChange"></param>
         public void ChangeInventories(List<Inventory_Item> PlayerChange, List<Inventory_Item> StoreChange, int ChangeAmount) {
 
+            //Check each item in the store inventory
             foreach (var StoreValueChange in StoreChange) {
 
+                //If the user choice is the in the list, trade the item
                 if (TradeUserChoice == StoreValueChange.Item_Name) {
-                    if (ChangeAmount <= StoreValueChange.Item_Amount) {
-                        StoreValueChange.Item_Amount -= ChangeAmount;
+
+                    //Check if the item in stock is not avalible
+                    //If it is, buy the item
+                    if (StoreValueChange.Item_Amount != 0) {
+                        if (ChangeAmount <= StoreValueChange.Item_Amount) {
+                            StoreValueChange.Item_Amount -= ChangeAmount;
+                        }
+
+                        //If you trade more than the shop has but the shop has the item, take the rest of the amount and 
+                        else {
+
+                            Console.WriteLine($"You wanted to trade {ChangeAmount} {TradeUserChoice} but the shop only had {StoreValueChange.Item_Amount}.");
+
+                            ChangeAmount = StoreValueChange.Item_Amount;
+
+                            Console.WriteLine($"You ended up trading for the rest of their stock instead ({ChangeAmount}).");
+
+                            StoreValueChange.Item_Amount -= StoreValueChange.Item_Amount;
+                        }
                     }
 
+                    //Tell the user the item is out of stock if there is none left
                     else {
-                        ChangeAmount = StoreValueChange.Item_Amount;
-
-                        StoreValueChange.Item_Amount -= StoreValueChange.Item_Amount;
+                        Console.WriteLine($"The {TradeUserChoice} is currently out of stock.");
                     }
                 }
             }
@@ -101,8 +119,8 @@ namespace Store_RPG_Assignment {
             //Check each item in the inventory until the user choice is the same as the inventory item
             foreach (var ItemValueChange in PlayerChange) {
 
+                //Add the change amount to the user inventory
                 if (TradeUserChoice == ItemValueChange.Item_Name) {
-
                     ItemValueChange.Item_Amount += ChangeAmount;
                 }
             }
