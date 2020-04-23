@@ -66,7 +66,6 @@ namespace Store_RPG_Assignment {
         public string ReturnSortInventory() {
 
             return SortChoice;
-
         }
 
         /// <summary>
