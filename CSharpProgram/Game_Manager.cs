@@ -87,7 +87,7 @@ namespace Store_RPG_Assignment {
 
                     case "exit":
                         //Quit the game
-
+                        CurrentState = GameState.Exit;
                         break;
 
                     default:
@@ -203,7 +203,10 @@ namespace Store_RPG_Assignment {
         /// <summary>
         /// Manages how to exit the game
         /// </summary>
-        public void RunExitGame() { }
+        public void RunExitGame() {
+
+            Environment.Exit(0);
+        }
 
         /// <summary>
         /// Menu to trade items from the store inventory to the players
