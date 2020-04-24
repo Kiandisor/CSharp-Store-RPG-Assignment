@@ -14,7 +14,7 @@ namespace Store_RPG_Assignment {
         public List<Inventory_Item> Inventory = new List<Inventory_Item>() {
 
         //Art Book
-        new Inventory_Item{ Item_Name = "art book", Item_Amount = 0, Item_Cost = 1, Item_Pages = "50" },
+        new Inventory_Item{ Item_Name = "art book", Item_Amount = 0, Item_Cost = 10, Item_Pages = "50" },
 
         //Programming Book
         new Inventory_Item{ Item_Name = "c# book", Item_Amount = 0, Item_Cost = 20, Item_Pages = "150" },
