@@ -12,4 +12,7 @@ The game is a simple text-based store trader which allows the player to purchase
 - [ ] Save the store and player inventory items to a text file before the program exits.
 - [x] Use text commands to list the inventory; buy, sell or inspect items.
 - [ ] Include a hidden command to allow a ‘super user’ to add new items to the store.
-- [ ] Perform and document unit tests on multiple sub-systems.As you implement your text commands, or file I/O.
+- [ ] Perform and document unit tests on multiple sub-systems.As you implement your text commands, or file I/O. (In-progress)
+
+## Functions:
+In=progress
