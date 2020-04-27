@@ -15,4 +15,4 @@ The game is a simple text-based store trader which allows the player to purchase
 - [ ] Perform and document unit tests on multiple sub-systems.As you implement your text commands, or file I/O. (In-progress)
 
 ## Functions:
-In=progress
+In-progress
