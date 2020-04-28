@@ -20,7 +20,8 @@ namespace Store_RPG_Assignment {
             ToPlayer,//4
             PlayerInventoryMenu, //5
             StoreInventoryMenu, //6
-            Exit //7
+            Exit, //7
+            SuperUser //8
         }
 
         /// <summary>
