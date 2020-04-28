@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Store_RPG_Assignment {
+﻿namespace Store_RPG_Assignment {
 
     class Program {
         static void Main() {
