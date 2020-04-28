@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Store_RPG_Assignment {
-
     /// <summary>
     /// Base class for making an item
     /// </summary>
