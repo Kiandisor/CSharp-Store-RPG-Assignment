@@ -16,12 +16,10 @@ namespace Store_RPG_Assignment {
             GetPlayerName, //0
             Menu, //1
             Trade, //2
-            ToShop, //3
-            ToPlayer,//4
-            PlayerInventoryMenu, //5
-            StoreInventoryMenu, //6
-            Exit, //7
-            SuperUser //8
+            PlayerInventoryMenu, //3
+            StoreInventoryMenu, //4
+            Exit, //5
+            SuperUser //6
         }
 
         /// <summary>
@@ -97,7 +95,6 @@ namespace Store_RPG_Assignment {
                         break;
                 }
             }
-
         }
 
         /// <summary>
@@ -107,34 +104,47 @@ namespace Store_RPG_Assignment {
 
             //Run the trade menu while the gamestate is trade
             while (CurrentState == GameState.Trade) {
-                TradeMenu.ShowSelectInventoryMenu();
 
-                //Switch for the trade menu choice
-                switch (TradeMenu.ReturnTradeMenuChoice()) {
+                //TradeMenu.ShowTradeMenu();
 
-                    case "to":
-                        CurrentState = GameState.ToShop;
-                        ToTheStoreInventory();
-                        break;
+                TradeMenu.GetItemChoice();
 
-                    case "from":
-                        CurrentState = GameState.ToPlayer;
-                        ToThePlayerInventory();
-                        break;
-
-                    case "menu":
-                        CurrentState = GameState.Menu;
-                        Console.Clear();
-                        break;
+                if (TradeMenu.ReturnTradeUserChoice() == "menu") {
+                    CurrentState = GameState.Menu;
                 }
+
+                TradeMenu.GetTo_Or_From();
+
+                TradeMenu.GetAmount();
+
+                TradeMenu.ChangeInventory(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory, TradeMenu.ReturnTradeUserChoice(), TradeMenu.ReturnItemAmount(), TradeMenu.ReturnTradeToChoice());
+
+                //TradeMenu.ShowTradeMenu();
+
+                ////Switch for the trade menu choice
+                //switch (TradeMenu.ReturnTradeToChoice()) {
+
+                //    case "to":
+                //        TradeMenu.ChangeInventory(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory, TradeMenu.GetItemChoice(), TradeMenu.TradeItemAmount(), TradeMenu.GetTo_Or_From());
+                //        break;
+
+                //    case "from":
+                //        TradeMenu.ChangeInventory(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory, TradeMenu.ReturnTradeUserChoice(), TradeMenu.TradeItemAmount(), true);
+                //        break;
+
+                //    case "menu":
+                //        CurrentState = GameState.Menu;
+                //        Console.Clear();
+                //        break;
             }
         }
 
-        /// <summary>
-        /// Manages the Player Inventory Menu
-        /// </summary>
+        ///// <summary>
+        ///// Manages the Player Inventory Menu
+        ///// </summary>
         public void RunPlayerInventory() {
             while (CurrentState == GameState.PlayerInventoryMenu) {
+
                 UserInventory.SortListMenu();
 
                 switch (UserInventory.ReturnSortInventory()) {
@@ -165,9 +175,9 @@ namespace Store_RPG_Assignment {
             }
         }
 
-        /// <summary>
-        /// Manages the Store Inventory Menu
-        /// </summary>
+        ///// <summary>
+        ///// Manages the Store Inventory Menu
+        ///// </summary>
         public void RunStoreInventory() {
             while (CurrentState == GameState.StoreInventoryMenu) {
 
@@ -200,85 +210,87 @@ namespace Store_RPG_Assignment {
                 }
             }
         }
-
-        /// <summary>
-        /// Manages how to exit the game
-        /// </summary>
+        
+        ///// <summary>
+        ///// Manages how to exit the game
+        ///// </summary>
         public void RunExitGame() {
 
             Environment.Exit(0);
         }
-
-        /// <summary>
-        /// Menu to trade items from the store inventory to the players
-        /// </summary>
-        public void ToThePlayerInventory() {
-            while (CurrentState == GameState.ToPlayer) {
-                TradeMenu.ShowTradeMenu();
-
-                //Switch for the trade menu choice
-                switch (TradeMenu.ReturnTradeUserChoice()) {
-                    case "art book":
-                        TradeMenu.ChangeShopInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
-                        break;
-
-                    case "c# book":
-                        TradeMenu.ChangeShopInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
-                        break;
-
-                    case "medic book":
-                        TradeMenu.ChangeShopInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
-                        break;
-
-                    case "note book":
-                        TradeMenu.ChangeShopInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
-                        break;
-
-                    case "menu":
-                        Console.Clear();
-                        CurrentState = GameState.Menu;
-                        break;
-                    default:
-                        Console.Clear();
-                        break;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Menu to trade items from the players inventory to the stores
-        /// </summary>
-        public void ToTheStoreInventory() {
-            while (CurrentState == GameState.ToShop) {
-                TradeMenu.ShowTradeMenu();
-
-                //Switch for the trade menu choice
-                switch (TradeMenu.ReturnTradeUserChoice()) {
-                    case "art book":
-                        TradeMenu.ChangePlayerInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
-                        break;
-
-                    case "c# book":
-                        TradeMenu.ChangePlayerInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
-                        break;
-
-                    case "medic book":
-                        TradeMenu.ChangePlayerInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
-                        break;
-
-                    case "note book":
-                        TradeMenu.ChangePlayerInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
-                        break;
-
-                    case "menu":
-                        Console.Clear();
-                        CurrentState = GameState.Menu;
-                        break;
-                    default:
-                        Console.Clear();
-                        break;
-                }
-            }
-        }
     }
+
+
+
+    ///// <summary>
+    ///// Menu to trade items from the store inventory to the players
+    ///// </summary>
+    //public void ToThePlayerInventory() {
+    //    while (CurrentState == GameState.ToPlayer) {
+    //        TradeMenu.ShowTradeMenu();
+
+    //        //Switch for the trade menu choice
+    //        switch (TradeMenu.ReturnTradeUserChoice()) {
+    //            case "art book":
+    //                TradeMenu.ChangeShopInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
+    //                break;
+
+    //            case "c# book":
+    //                TradeMenu.ChangeShopInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
+    //                break;
+
+    //            case "medic book":
+    //                TradeMenu.ChangeShopInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
+    //                break;
+
+    //            case "note book":
+    //                TradeMenu.ChangeShopInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
+    //                break;
+
+    //            case "menu":
+    //                Console.Clear();
+    //                CurrentState = GameState.Menu;
+    //                break;
+    //            default:
+    //                Console.Clear();
+    //                break;
+    //        }
+    //    }
+    //}
+
+    ///// <summary>
+    ///// Menu to trade items from the players inventory to the stores
+    ///// </summary>
+    //public void ToTheStoreInventory() {
+    //    while (CurrentState == GameState.ToShop) {
+    //        TradeMenu.ShowTradeMenu();
+
+    //        //Switch for the trade menu choice
+    //        switch (TradeMenu.ReturnTradeUserChoice()) {
+    //            case "art book":
+    //                TradeMenu.ChangePlayerInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
+    //                break;
+
+    //            case "c# book":
+    //                TradeMenu.ChangePlayerInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
+    //                break;
+
+    //            case "medic book":
+    //                TradeMenu.ChangePlayerInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
+    //                break;
+
+    //            case "note book":
+    //                TradeMenu.ChangePlayerInventory(UserInventory.Inventory, StoreInventory.Store_Stock_Inventory, TradeMenu.GetAmount());
+    //                break;
+
+    //            case "menu":
+    //                Console.Clear();
+    //                CurrentState = GameState.Menu;
+    //                break;
+    //            default:
+    //                Console.Clear();
+    //                break;
+    //        }
+    //    }
+    //}
 }
