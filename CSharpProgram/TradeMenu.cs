@@ -16,6 +16,9 @@ namespace Store_RPG_Assignment {
         //Int for the amount to add or subtract from the inventory
         int ChangeAmount = 0;
 
+        //Float for the amount the store and players currency will change
+        float ChangeCurrency = 0f;
+
         /// <summary>
         /// Prints the menu for selecting which inventory you want to take from
         /// </summary>
@@ -25,7 +28,7 @@ namespace Store_RPG_Assignment {
             Console.WriteLine("- To the store (to)");
             Console.WriteLine("- From the store (from)");
             Console.WriteLine("- Back to menu (menu)");
-            
+
             TradeMenuChoice = Console.ReadLine().ToLower();
         }
 
@@ -49,7 +52,7 @@ namespace Store_RPG_Assignment {
         /// </summary>
         /// <returns></returns>
         public string ReturnTradeUserChoice() {
-            
+
             return TradeUserChoice;
         }
 
@@ -69,7 +72,7 @@ namespace Store_RPG_Assignment {
         /// <returns></returns>
         public int TradeItemAmount(int amount) {
 
-            return amount;        
+            return amount;
         }
 
         /// <summary>
@@ -79,7 +82,7 @@ namespace Store_RPG_Assignment {
         public int GetAmount() {
 
             Console.WriteLine($"How many {TradeUserChoice}s would you like to trade?");
-            
+
             //Gets the users amount
             string sChangeAmount = Console.ReadLine();
 
@@ -111,37 +114,32 @@ namespace Store_RPG_Assignment {
             foreach (var StoreValueChange in StoreChange) {
 
                 //If the user choice is the in the list, trade the item
-                if (TradeUserChoice == StoreValueChange.Item_Name) {
+                if (TradeUserChoice != StoreValueChange.Item_Name) {
+                    continue;
+                }
 
-                    //Check if the item in stock is not avalible
-                    //If it is, buy the item
-                    if (StoreValueChange.Item_Amount != 0) {
-                        if (ChangeAmount <= StoreValueChange.Item_Amount) {
-                            StoreValueChange.Item_Amount -= ChangeAmount;
-                            Console.WriteLine($"You have traded for {ChangeAmount} {TradeUserChoice}");
-                        }
+                if (StoreValueChange.Item_Amount == 0) {
+                    Console.Clear();
+                    Console.WriteLine($"The {TradeUserChoice} is currently out of stock.");
+                    Console.WriteLine();
+                }
 
-                        //If you trade more than the shop has but the shop has the item, take the rest of the amount and 
-                        else {
+                if (ChangeAmount > StoreValueChange.Item_Amount && StoreValueChange.Item_Amount != 0) {
+                    Console.WriteLine($"You wanted to trade {ChangeAmount} {TradeUserChoice} but the shop only had {StoreValueChange.Item_Amount}.");
 
-                            Console.WriteLine($"You wanted to trade {ChangeAmount} {TradeUserChoice} but the shop only had {StoreValueChange.Item_Amount}.");
+                    ChangeAmount = StoreValueChange.Item_Amount;
 
-                            ChangeAmount = StoreValueChange.Item_Amount;
+                    Console.WriteLine($"You ended up trading for the rest of their stock instead ({ChangeAmount}).");
 
-                            Console.WriteLine($"You ended up trading for the rest of their stock instead ({ChangeAmount}).");
+                    StoreValueChange.Item_Amount -= StoreValueChange.Item_Amount;
 
-                            StoreValueChange.Item_Amount -= StoreValueChange.Item_Amount;
+                    Console.WriteLine();
+                }
 
-                            Console.WriteLine();
-                        }
-                    }
-
-                    //Tell the user the item is out of stock if there is none left
-                    else {
-                        Console.Clear();
-                        Console.WriteLine($"The {TradeUserChoice} is currently out of stock.");
-                        Console.WriteLine();
-                    }
+                else {
+                    StoreValueChange.Item_Amount -= ChangeAmount;
+                    ChangeCurrency -= StoreValueChange.Item_Cost;
+                    Console.WriteLine($"You have traded for {ChangeAmount} {TradeUserChoice}");
                 }
             }
 
@@ -163,40 +161,37 @@ namespace Store_RPG_Assignment {
         public void ChangePlayerInventory(List<Inventory_Item> PlayerChange, List<Inventory_Item> StoreChange, int ChangeAmount) {
 
             //Check each item in the store inventory
-            foreach (var PlayerValueChange in PlayerChange) {
+            foreach (var PlayerValueChange in StoreChange) {
 
                 //If the user choice is the in the list, trade the item
-                if (TradeUserChoice == PlayerValueChange.Item_Name) {
+                if (TradeUserChoice != PlayerValueChange.Item_Name) {
+                    continue;
+                }
 
-                    //Check if the item in stock is not avalible
-                    //If it is, buy the item
-                    if (PlayerValueChange.Item_Amount != 0) {
-                        if (ChangeAmount <= PlayerValueChange.Item_Amount) {
-                            PlayerValueChange.Item_Amount -= ChangeAmount;
-                            Console.WriteLine($"You traded to the shop {ChangeAmount} {TradeUserChoice}(s)");
-                        }
+                if (PlayerValueChange.Item_Amount == 0) {
+                    Console.Clear();
+                    Console.WriteLine($"You don't have any {TradeUserChoice}.");
+                    Console.WriteLine();
+                    break;
+                }
 
-                        //If you trade more than the shop has but the shop has the item, take the rest of the amount and 
-                        else {
+                if (ChangeAmount > PlayerValueChange.Item_Amount && PlayerValueChange.Item_Amount != 0) {
+                    Console.WriteLine($"You wanted to trade {ChangeAmount} {TradeUserChoice} to the shop but only had {PlayerValueChange.Item_Amount}.");
 
-                            Console.WriteLine($"You wanted to trade {ChangeAmount} {TradeUserChoice} to the shop but only had {PlayerValueChange.Item_Amount}.");
+                    ChangeAmount = PlayerValueChange.Item_Amount;
 
-                            ChangeAmount = PlayerValueChange.Item_Amount;
+                    Console.WriteLine($"You ended up trading the rest of the {ChangeAmount}(s) you had.");
 
-                            Console.WriteLine($"You ended up trading for the rest the {TradeUserChoice}(s) instead ({ChangeAmount}).");
+                    PlayerValueChange.Item_Amount -= PlayerValueChange.Item_Amount;
 
-                            PlayerValueChange.Item_Amount -= PlayerValueChange.Item_Amount;
+                    Console.WriteLine();
+                    break;
+                }
 
-                            Console.WriteLine();
-                        }
-                    }
-
-                    //Tell the user the item is out of stock if there is none left
-                    else {
-                        Console.Clear();
-                        Console.WriteLine($"You don't have any {TradeUserChoice} in your inventory.");
-                        Console.WriteLine();
-                    }
+                else {
+                    PlayerValueChange.Item_Amount -= ChangeAmount;
+                    ChangeCurrency -= PlayerValueChange.Item_Cost;
+                    Console.WriteLine($"You have traded for {ChangeAmount} {TradeUserChoice}");
                 }
             }
 
