@@ -160,7 +160,7 @@ namespace Store_RPG_Assignment {
 
             else {
                 Console.Clear();
-                Console.WriteLine($"You don't have any {TradeUserChoice}.");
+                Console.WriteLine($"You don't have any {TradeUserChoice}s.");
                 Console.WriteLine();
             }
         }
@@ -171,13 +171,15 @@ namespace Store_RPG_Assignment {
         /// <param name="AmountInInventory"></param>
         /// <param name="amount"></param>
         /// <param name="PlayerOrStore"></param>
-        public void TradedRemainder(ref int AmountInInventory, int amount, bool PlayerOrStore) {
+        public void TradedRemainder(ref int AmountInInventory, ref int amount, bool PlayerOrStore) {
 
             if (PlayerOrStore == true) {
                 Console.WriteLine($"You wanted to trade {amount} {TradeUserChoice} but the shop only had {AmountInInventory}.");
                 Console.WriteLine($"You ended up trading for the rest of their stock instead ({AmountInInventory}).");
 
-                AmountInInventory -= AmountInInventory;
+                amount = AmountInInventory;
+
+                AmountInInventory -= amount;
 
                 Console.WriteLine();
             }
@@ -186,7 +188,11 @@ namespace Store_RPG_Assignment {
                 Console.WriteLine($"You wanted to trade {amount} {TradeUserChoice} to the shop but only had {AmountInInventory}.");
                 Console.WriteLine($"You ended up trading the rest of the {TradeUserChoice}(s) you had.");
 
-                AmountInInventory -= AmountInInventory;
+                amount = AmountInInventory;
+
+                AmountInInventory -= amount;
+
+                Console.WriteLine();
             }
         }
 
@@ -239,7 +245,7 @@ namespace Store_RPG_Assignment {
 
                     if (ChangeAmount > StoreValueChange.Item_Amount && StoreValueChange.Item_Amount != 0) {
 
-                        TradedRemainder(ref StoreValueChange.Item_Amount, Amount, To_Or_From);
+                        TradedRemainder(ref StoreValueChange.Item_Amount, ref Amount, To_Or_From);
                         break;
                     }
 
@@ -276,7 +282,7 @@ namespace Store_RPG_Assignment {
 
                     if (ChangeAmount > PlayerValueChange.Item_Amount && PlayerValueChange.Item_Amount != 0) {
 
-                        TradedRemainder(ref PlayerValueChange.Item_Amount, Amount, To_Or_From);
+                        TradedRemainder(ref PlayerValueChange.Item_Amount, ref Amount, To_Or_From);
                         break;
                     }
 
