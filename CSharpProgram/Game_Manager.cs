@@ -105,19 +105,11 @@ namespace Store_RPG_Assignment {
             //Run the trade menu while the gamestate is trade
             while (CurrentState == GameState.Trade) {
 
-                //TradeMenu.ShowTradeMenu();
-
-                TradeMenu.GetItemChoice();
-
-                if (TradeMenu.ReturnTradeUserChoice() == "menu") {
-                    CurrentState = GameState.Menu;
-                }
-
-                TradeMenu.GetTo_Or_From();
-
-                TradeMenu.GetAmount();
+                TradeMenu.ShowTradeMenu();
 
                 TradeMenu.ChangeInventory(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory, TradeMenu.ReturnTradeUserChoice(), TradeMenu.ReturnItemAmount(), TradeMenu.ReturnTradeToChoice());
+
+                
 
                 //TradeMenu.ShowTradeMenu();
 

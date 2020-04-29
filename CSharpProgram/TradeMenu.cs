@@ -111,6 +111,9 @@ namespace Store_RPG_Assignment {
                 case "from":
                     To_Or_From = true;
                     break;
+                default:
+                    To_Or_From = true;
+                    break;
             }
 
             return To_Or_From;
@@ -174,8 +177,6 @@ namespace Store_RPG_Assignment {
                 Console.WriteLine($"You wanted to trade {amount} {TradeUserChoice} but the shop only had {AmountInInventory}.");
                 Console.WriteLine($"You ended up trading for the rest of their stock instead ({AmountInInventory}).");
 
-                amount = AmountInInventory;
-
                 AmountInInventory -= AmountInInventory;
 
                 Console.WriteLine();
@@ -183,9 +184,7 @@ namespace Store_RPG_Assignment {
 
             else {
                 Console.WriteLine($"You wanted to trade {amount} {TradeUserChoice} to the shop but only had {AmountInInventory}.");
-                Console.WriteLine($"You ended up trading the rest of the {ChangeAmount}(s) you had.");
-
-                amount = AmountInInventory;
+                Console.WriteLine($"You ended up trading the rest of the {TradeUserChoice}(s) you had.");
 
                 AmountInInventory -= AmountInInventory;
             }
@@ -197,13 +196,20 @@ namespace Store_RPG_Assignment {
         /// <param name="AmountInInventory"></param>
         /// <param name="amount"></param>
         /// <param name="PlayerOrStore"></param>
-        public void PurchaseItem(ref int AmountInInventory, int amount) {
-            
-            //ChangeCurrency -= StoreValueChange.Item_Cost;
-            Console.WriteLine($"You have traded for {amount} {TradeUserChoice}(s).");
+        public void PurchaseItem(ref int AmountInInventory, int amount, bool PlayerOrStore) {
+            if (PlayerOrStore == true) {
+                AmountInInventory -= amount;
+                Console.WriteLine($"You have traded for {amount} {TradeUserChoice}(s).");
 
-            Console.WriteLine();
-            
+                Console.WriteLine();
+            }
+
+            else {
+                AmountInInventory -= amount;
+                Console.WriteLine($"You have traded back {amount} {TradeUserChoice}(s).");
+
+                Console.WriteLine();
+            }
         }
 
         /// <summary>
@@ -213,39 +219,79 @@ namespace Store_RPG_Assignment {
         /// <param name="StoreChange"></param>
         /// <param name="ChangeAmount"></param>
         /// <param name="To_Or_From"></param>
-        public void ChangeInventory(ref List<Inventory_Item> PlayerChange,ref List<Inventory_Item> StoreChange, string ItemChoice, int Amount, bool To_Or_From) {
+        public void ChangeInventory(ref List<Inventory_Item> PlayerChange, ref List<Inventory_Item> StoreChange, string ItemChoice, int Amount, bool To_Or_From) {
 
-            //Check each item in the store inventory
-            foreach (var StoreValueChange in StoreChange) {
+            if (To_Or_From == true) {
+                //Check each item in the store inventory
+                foreach (var StoreValueChange in StoreChange) {
 
-                //If the user choice is the in the list, trade the item
-                if (ItemChoice != StoreValueChange.Item_Name) {
+                    //If the user choice is the in the list, trade the item
+                    if (ItemChoice != StoreValueChange.Item_Name) {
 
-                    continue;
+                        continue;
+                    }
+
+                    if (StoreValueChange.Item_Amount == 0) {
+
+                        OutOfStock(To_Or_From);
+                        break;
+                    }
+
+                    if (ChangeAmount > StoreValueChange.Item_Amount && StoreValueChange.Item_Amount != 0) {
+
+                        TradedRemainder(ref StoreValueChange.Item_Amount, Amount, To_Or_From);
+                        break;
+                    }
+
+                    else {
+                        PurchaseItem(ref StoreValueChange.Item_Amount, Amount, To_Or_From);
+                    }
                 }
 
-                if (StoreValueChange.Item_Amount == 0) {
+                //Check each item in the inventory until the user choice is the same as the inventory item
+                foreach (var ItemValueChange in PlayerChange) {
 
-                    OutOfStock(To_Or_From);
-                }
-
-                if (ChangeAmount > StoreValueChange.Item_Amount && StoreValueChange.Item_Amount != 0) {
-
-                    TradedRemainder(ref StoreValueChange.Item_Amount, Amount, To_Or_From);
-                }
-
-                else {
-
-                    PurchaseItem(ref StoreValueChange.Item_Amount, Amount);
+                    //Add the change amount to the user inventory
+                    if (TradeUserChoice == ItemValueChange.Item_Name) {
+                        ItemValueChange.Item_Amount += ChangeAmount;
+                    }
                 }
             }
 
-            //Check each item in the inventory until the user choice is the same as the inventory item
-            foreach (var ItemValueChange in PlayerChange) {
+            else {
+                //Check each item in the store inventory
+                foreach (var PlayerValueChange in PlayerChange) {
 
-                //Add the change amount to the user inventory
-                if (TradeUserChoice == ItemValueChange.Item_Name) {
-                    ItemValueChange.Item_Amount += ChangeAmount;
+                    //If the user choice is the in the list, trade the item
+                    if (ItemChoice != PlayerValueChange.Item_Name) {
+
+                        continue;
+                    }
+
+                    if (PlayerValueChange.Item_Amount == 0) {
+
+                        OutOfStock(To_Or_From);
+                        break;
+                    }
+
+                    if (ChangeAmount > PlayerValueChange.Item_Amount && PlayerValueChange.Item_Amount != 0) {
+
+                        TradedRemainder(ref PlayerValueChange.Item_Amount, Amount, To_Or_From);
+                        break;
+                    }
+
+                    else {
+                        PurchaseItem(ref PlayerValueChange.Item_Amount, Amount, To_Or_From);
+                    }
+                }
+
+                //Check each item in the inventory until the user choice is the same as the inventory item
+                foreach (var ItemValueChange in StoreChange) {
+
+                    //Add the change amount to the user inventory
+                    if (TradeUserChoice == ItemValueChange.Item_Name) {
+                        ItemValueChange.Item_Amount += ChangeAmount;
+                    }
                 }
             }
         }
