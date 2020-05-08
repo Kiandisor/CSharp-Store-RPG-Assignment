@@ -107,7 +107,7 @@ namespace Store_RPG_Assignment {
 
                 TradeMenu.ShowTradeMenu();
 
-                TradeMenu.ChangeInventory(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory, TradeMenu.ReturnTradeUserChoice(), TradeMenu.ReturnItemAmount(), TradeMenu.ReturnTradeToChoice());
+                TradeMenu.ChangeInventory(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory, TradeMenu.ReturnTradeUserChoice, TradeMenu.ReturnItemAmount(), TradeMenu.ReturnTradeToChoice);
 
                 
 

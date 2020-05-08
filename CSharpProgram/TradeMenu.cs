@@ -123,18 +123,20 @@ namespace Store_RPG_Assignment {
         /// Returns the user choice for the trade menu
         /// </summary>
         /// <returns></returns>
-        public string ReturnTradeUserChoice() {
-
+        public string ReturnTradeUserChoice {
+            get {
             return TradeUserChoice;
+            }
         }
 
         /// <summary>
         /// Returns the user choice for which inventory to trade to menu
         /// </summary>
         /// <returns></returns>
-        public bool ReturnTradeToChoice() {
-
+        public bool ReturnTradeToChoice {
+            get {
             return To_Or_From;
+            }
         }
 
         /// <summary>
@@ -142,9 +144,10 @@ namespace Store_RPG_Assignment {
         /// </summary>
         /// <param name="amount"></param>
         /// <returns></returns>
-        public int ReturnItemAmount() {
-
-            return ChangeAmount;
+        public int ReturnItemAmount {
+            get {
+                return ChangeAmount;
+            }
         }
 
         /// <summary>
