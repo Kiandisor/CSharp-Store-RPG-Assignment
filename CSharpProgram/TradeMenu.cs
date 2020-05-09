@@ -38,7 +38,6 @@ namespace Store_RPG_Assignment {
             Console.WriteLine("- C# Book");
             Console.WriteLine("- Medic Book");
             Console.WriteLine("- Note Book");
-            Console.WriteLine("- Return to menu (menu)");
 
             TradeUserChoice = Console.ReadLine().ToLower();
 
@@ -54,6 +53,9 @@ namespace Store_RPG_Assignment {
                     return TradeUserChoice;
 
                 case "note book":
+                    return TradeUserChoice;
+
+                case "Menu":
                     return TradeUserChoice;
 
                 default:
