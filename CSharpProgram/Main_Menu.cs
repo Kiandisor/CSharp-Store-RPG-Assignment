@@ -5,16 +5,18 @@ namespace Store_RPG_Assignment {
     /// Functions and variables for the main menu
     /// </summary>
     class Menu {
-        
-        /// <summary>
-        /// String for the user choice
-        /// </summary>
-        string MenuUserChoice = "";
 
         /// <summary>
-        /// String for the player name
+        /// Returns the Player name
         /// </summary>
-        string PlayerName = "";
+        /// <returns></returns>
+        public string ReturnName { get; private set; } = "";
+
+        /// <summary>
+        /// Returns the user choice for the main menu
+        /// </summary>
+        /// <returns></returns>
+        public string ReturnMenuUserChoice { get; private set; } = "";
 
         /// <summary>
         /// Ask for the users name
@@ -22,39 +24,21 @@ namespace Store_RPG_Assignment {
         public void GetName() {
             
             Console.WriteLine("Greetings, what is your name? ");
-            PlayerName = Console.ReadLine();
+            ReturnName = Console.ReadLine();
 
             //while the user enters an empty name ask them for one
-            while (PlayerName == "") {
+            while (ReturnName == "") {
                 Console.Clear();
                 Console.WriteLine("Please enter a name:");
-                PlayerName = Console.ReadLine();
+                ReturnName = Console.ReadLine();
             }
-        }
-
-        /// <summary>
-        /// Returns the Player name
-        /// </summary>
-        /// <returns></returns>
-        public string ReturnName() {
-
-            return PlayerName;
-        }
-
-        /// <summary>
-        /// Returns the user choice for the main menu
-        /// </summary>
-        /// <returns></returns>
-        public string ReturnMenuUserChoice() {
-
-            return MenuUserChoice;
         }
 
         /// <summary>
         /// Print out the main menu and get the user input
         /// </summary>
         public void ShowMainMenu() {
-            Console.WriteLine($"Welcome to the trading game, {PlayerName}!");
+            Console.WriteLine($"Welcome to the trading game, {ReturnName}!");
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("- Trade with the shop (trade)");
             Console.WriteLine("- View your Inventory (inventory)");
@@ -63,7 +47,7 @@ namespace Store_RPG_Assignment {
             Console.WriteLine("- Quit the game (exit)");
 
             //Get user input
-            MenuUserChoice = Console.ReadLine().ToLower();
+            ReturnMenuUserChoice = Console.ReadLine().ToLower();
         }
     }
 }

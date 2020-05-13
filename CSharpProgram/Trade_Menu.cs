@@ -7,37 +7,20 @@ namespace Store_RPG_Assignment {
     /// </summary>
     class Trading_Menu {
 
-        //String for the user choice for the items
-        string TradeUserChoice = "";
-
         //Int for the amount to add or subtract from the inventory
         int ChangeAmount = 0;
-
-        //Float for the amount the store and players currency will change
-        //float ChangeCurrency = 0f;
-
-        //Bool to check if the player is trading to the shop or from it
-        bool To_Or_From = true;
 
         /// <summary>
         /// Returns the user choice for the trade menu
         /// </summary>
         /// <returns></returns>
-        public string ReturnTradeUserChoice {
-            get {
-                return TradeUserChoice;
-            }
-        }
+        public string ReturnTradeUserChoice { get; private set; } = "";
 
         /// <summary>
         /// Returns the user choice for which inventory to trade to menu
         /// </summary>
         /// <returns></returns>
-        public bool ReturnTradeToChoice {
-            get {
-                return To_Or_From;
-            }
-        }
+        public bool ReturnTradeToChoice { get; private set; } = true;
 
         /// <summary>
         /// Return amount to buy
@@ -62,6 +45,10 @@ namespace Store_RPG_Assignment {
             GetAmount();
         }
 
+        /// <summary>
+        /// Sets the item choice for what the user wants to trade
+        /// </summary>
+        /// <returns></returns>
         public string GetItemChoice() {
             Console.WriteLine("Welcome to the store!");
             Console.WriteLine("What would you like to trade?");
@@ -70,24 +57,24 @@ namespace Store_RPG_Assignment {
             Console.WriteLine("- Medic Book");
             Console.WriteLine("- Note Book");
 
-            TradeUserChoice = Console.ReadLine().ToLower();
+            ReturnTradeUserChoice = Console.ReadLine().ToLower();
 
-            switch (TradeUserChoice) {
+            switch (ReturnTradeUserChoice) {
 
                 case "art book":
-                    return TradeUserChoice;
+                    return ReturnTradeUserChoice;
 
                 case "c# book":
-                    return TradeUserChoice;
+                    return ReturnTradeUserChoice;
 
                 case "medic book":
-                    return TradeUserChoice;
+                    return ReturnTradeUserChoice;
 
                 case "note book":
-                    return TradeUserChoice;
+                    return ReturnTradeUserChoice;
 
                 case "Menu":
-                    return TradeUserChoice;
+                    return ReturnTradeUserChoice;
 
                 default:
                     Console.Clear();
@@ -95,7 +82,7 @@ namespace Store_RPG_Assignment {
                     break;
             }
 
-            return TradeUserChoice;
+            return ReturnTradeUserChoice;
         }
 
         /// <summary>
@@ -104,7 +91,7 @@ namespace Store_RPG_Assignment {
         /// <returns></returns>
         public int GetAmount() {
 
-            Console.WriteLine($"How many {TradeUserChoice}s would you like to trade?");
+            Console.WriteLine($"How many {ReturnTradeUserChoice}s would you like to trade?");
 
             //Gets the users amount
             string sChangeAmount = Console.ReadLine();
@@ -142,10 +129,10 @@ namespace Store_RPG_Assignment {
 
             switch (TradeToChoice) {
                 case "to":
-                    To_Or_From = false;
+                    ReturnTradeToChoice = false;
                     break;
                 case "from":
-                    To_Or_From = true;
+                    ReturnTradeToChoice = true;
                     break;
                 default:
                     Console.Clear();
@@ -154,7 +141,7 @@ namespace Store_RPG_Assignment {
                     break;
             }
 
-            return To_Or_From;
+            return ReturnTradeToChoice;
         }
 
         /// <summary>
@@ -164,13 +151,13 @@ namespace Store_RPG_Assignment {
             
             if (PlayerOrStore == true) {
                 Console.Clear();
-                Console.WriteLine($"The {TradeUserChoice} is currently out of stock.");
+                Console.WriteLine($"The {ReturnTradeUserChoice} is currently out of stock.");
                 Console.WriteLine();
             }
 
             else {
                 Console.Clear();
-                Console.WriteLine($"You don't have any {TradeUserChoice}s.");
+                Console.WriteLine($"You don't have any {ReturnTradeUserChoice}s.");
                 Console.WriteLine();
             }
         }
@@ -184,7 +171,7 @@ namespace Store_RPG_Assignment {
         public void TradedRemainder(ref int AmountInInventory, ref int amount, bool PlayerOrStore) {
 
             if (PlayerOrStore == true) {
-                Console.WriteLine($"You wanted to trade {amount} {TradeUserChoice} but the shop only had {AmountInInventory}.");
+                Console.WriteLine($"You wanted to trade {amount} {ReturnTradeUserChoice} but the shop only had {AmountInInventory}.");
                 Console.WriteLine($"You ended up trading for the rest of their stock instead ({AmountInInventory}).");
 
                 amount = AmountInInventory;
@@ -195,8 +182,8 @@ namespace Store_RPG_Assignment {
             }
 
             else {
-                Console.WriteLine($"You wanted to trade {amount} {TradeUserChoice} to the shop but only had {AmountInInventory}.");
-                Console.WriteLine($"You ended up trading the rest of the {TradeUserChoice}(s) you had.");
+                Console.WriteLine($"You wanted to trade {amount} {ReturnTradeUserChoice} to the shop but only had {AmountInInventory}.");
+                Console.WriteLine($"You ended up trading the rest of the {ReturnTradeUserChoice}(s) you had.");
 
                 amount = AmountInInventory;
 
@@ -215,14 +202,14 @@ namespace Store_RPG_Assignment {
         public void PurchaseItem(ref int AmountInInventory, int amount, bool PlayerOrStore) {
             if (PlayerOrStore == true) {
                 AmountInInventory -= amount;
-                Console.WriteLine($"You have traded for {amount} {TradeUserChoice}(s).");
+                Console.WriteLine($"You have traded for {amount} {ReturnTradeUserChoice}(s).");
 
                 Console.WriteLine();
             }
 
             else {
                 AmountInInventory -= amount;
-                Console.WriteLine($"You have traded back {amount} {TradeUserChoice}(s).");
+                Console.WriteLine($"You have traded back {amount} {ReturnTradeUserChoice}(s).");
 
                 Console.WriteLine();
             }
@@ -235,7 +222,7 @@ namespace Store_RPG_Assignment {
         /// <param name="StoreChange"></param>
         /// <param name="ChangeAmount"></param>
         /// <param name="To_Or_From"></param>
-        public void ChangeInventory(ref List<Inventory_Item> PlayerChange, ref List<Inventory_Item> StoreChange, string ItemChoice, int Amount, bool To_Or_From, ref float money) {
+        public void ChangeInventory(ref List<Inventory_Item> PlayerChange, ref List<Inventory_Item> StoreChange, string ItemChoice, int Amount, bool To_Or_From) {
 
             if (To_Or_From == true) {
                 //Check each item in the store inventory
@@ -268,7 +255,7 @@ namespace Store_RPG_Assignment {
                 foreach (var ItemValueChange in PlayerChange) {
 
                     //Add the change amount to the user inventory
-                    if (TradeUserChoice == ItemValueChange.Item_Name) {
+                    if (ReturnTradeUserChoice == ItemValueChange.Item_Name) {
                         ItemValueChange.Item_Amount += ChangeAmount;
                     }
                 }
@@ -305,7 +292,7 @@ namespace Store_RPG_Assignment {
                 foreach (var ItemValueChange in StoreChange) {
 
                     //Add the change amount to the user inventory
-                    if (TradeUserChoice == ItemValueChange.Item_Name) {
+                    if (ReturnTradeUserChoice == ItemValueChange.Item_Name) {
                         ItemValueChange.Item_Amount += ChangeAmount;
                     }
                 }

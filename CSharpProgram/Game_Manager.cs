@@ -64,7 +64,7 @@ namespace Store_RPG_Assignment {
                 StartMenu.ShowMainMenu();
 
                 //Switch for the main menu choice
-                switch (StartMenu.ReturnMenuUserChoice()) {
+                switch (StartMenu.ReturnMenuUserChoice) {
                     case "trade":
                         //Open Trade Menu and clears the screen
                         Console.Clear();
@@ -119,7 +119,7 @@ namespace Store_RPG_Assignment {
                 TradeMenu.ShowTradeMenu();
 
                 TradeMenu.ChangeInventory(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory, 
-                    TradeMenu.ReturnTradeUserChoice, TradeMenu.ReturnItemAmount, TradeMenu.ReturnTradeToChoice, ref UserInventory.GetCurrency());
+                    TradeMenu.ReturnTradeUserChoice, TradeMenu.ReturnItemAmount, TradeMenu.ReturnTradeToChoice);
 
                 
 

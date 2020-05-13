@@ -41,9 +41,11 @@ namespace Store_RPG_Assignment {
         /// </summary>
         float currency = 35.0f;
 
-        public float GetCurrency() {
+        public float GetCurrency {
 
-            return currency;
+            get {
+                return currency;
+            }
         }
 
         /// <summary>
