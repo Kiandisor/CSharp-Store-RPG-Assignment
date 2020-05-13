@@ -8,6 +8,7 @@ namespace Store_RPG_Assignment {
         Trading_Menu TradeMenu = new Trading_Menu(); //Trading Menu object
         Player_Inventory_List UserInventory = new Player_Inventory_List(); //Player Inventory
         Store_Inventory_List StoreInventory = new Store_Inventory_List(); //Store Inventory
+        Super_User SuperUserAccsess = new Super_User();
 
         /// <summary>
         /// Enum for the state of the game
@@ -107,7 +108,7 @@ namespace Store_RPG_Assignment {
 
                 TradeMenu.ShowTradeMenu();
 
-                TradeMenu.ChangeInventory(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory, TradeMenu.ReturnTradeUserChoice, TradeMenu.ReturnItemAmount(), TradeMenu.ReturnTradeToChoice);
+                TradeMenu.ChangeInventory(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory, TradeMenu.ReturnTradeUserChoice, TradeMenu.ReturnItemAmount, TradeMenu.ReturnTradeToChoice);
 
                 
 
@@ -202,6 +203,8 @@ namespace Store_RPG_Assignment {
                 }
             }
         }
+
+        public void RunSuperUser() { }
         
         ///// <summary>
         ///// Manages how to exit the game
