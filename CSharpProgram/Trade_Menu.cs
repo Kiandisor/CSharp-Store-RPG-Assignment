@@ -20,6 +20,37 @@ namespace Store_RPG_Assignment {
         bool To_Or_From = true;
 
         /// <summary>
+        /// Returns the user choice for the trade menu
+        /// </summary>
+        /// <returns></returns>
+        public string ReturnTradeUserChoice {
+            get {
+                return TradeUserChoice;
+            }
+        }
+
+        /// <summary>
+        /// Returns the user choice for which inventory to trade to menu
+        /// </summary>
+        /// <returns></returns>
+        public bool ReturnTradeToChoice {
+            get {
+                return To_Or_From;
+            }
+        }
+
+        /// <summary>
+        /// Return amount to buy
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        public int ReturnItemAmount {
+            get {
+                return ChangeAmount;
+            }
+        }
+
+        /// <summary>
         /// Prints the menu for selecting which inventory you want to take from
         /// </summary>
         public void ShowTradeMenu() {
@@ -95,14 +126,17 @@ namespace Store_RPG_Assignment {
             }
         }
 
+        /// <summary>
+        /// Get where you want to take items from
+        /// </summary>
+        /// <returns></returns>
         public bool GetTo_Or_From() {
-
-            string TradeToChoice = "";
 
             Console.WriteLine("Would you like to trade to the store or from it?");
             Console.WriteLine("- To the store (to)");
             Console.WriteLine("- From the store (from)");
-            Console.WriteLine("- Back to menu (menu)");
+
+            string TradeToChoice = "";
 
             TradeToChoice = Console.ReadLine().ToLower();
 
@@ -114,42 +148,13 @@ namespace Store_RPG_Assignment {
                     To_Or_From = true;
                     break;
                 default:
-                    To_Or_From = true;
+                    Console.Clear();
+                    Console.WriteLine("Please enter a valid input");
+                    GetTo_Or_From();
                     break;
             }
 
             return To_Or_From;
-        }
-
-        /// <summary>
-        /// Returns the user choice for the trade menu
-        /// </summary>
-        /// <returns></returns>
-        public string ReturnTradeUserChoice {
-            get {
-            return TradeUserChoice;
-            }
-        }
-
-        /// <summary>
-        /// Returns the user choice for which inventory to trade to menu
-        /// </summary>
-        /// <returns></returns>
-        public bool ReturnTradeToChoice {
-            get {
-            return To_Or_From;
-            }
-        }
-
-        /// <summary>
-        /// Return amount to buy
-        /// </summary>
-        /// <param name="amount"></param>
-        /// <returns></returns>
-        public int ReturnItemAmount {
-            get {
-                return ChangeAmount;
-            }
         }
 
         /// <summary>
@@ -230,7 +235,7 @@ namespace Store_RPG_Assignment {
         /// <param name="StoreChange"></param>
         /// <param name="ChangeAmount"></param>
         /// <param name="To_Or_From"></param>
-        public void ChangeInventory(ref List<Inventory_Item> PlayerChange, ref List<Inventory_Item> StoreChange, string ItemChoice, int Amount, bool To_Or_From) {
+        public void ChangeInventory(ref List<Inventory_Item> PlayerChange, ref List<Inventory_Item> StoreChange, string ItemChoice, int Amount, bool To_Or_From, ref float money) {
 
             if (To_Or_From == true) {
                 //Check each item in the store inventory

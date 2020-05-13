@@ -7,6 +7,14 @@ namespace Store_RPG_Assignment {
     /// </summary>
     class Inventory_Item {
 
+        public Inventory_Item(string name, int amount, float cost, int pages) {
+
+            Item_Name = name;
+            Item_Amount = amount;
+            Item_Cost = cost;
+            Item_Pages = pages;
+        }
+
         //Variables for an item
         //String for Item Name
         public string Item_Name;
@@ -15,8 +23,7 @@ namespace Store_RPG_Assignment {
         //Cost of the Item
         public float Item_Cost;
         //Pages in the book
-        public string Item_Pages;
-
+        public int Item_Pages;
     }
 
     /// <summary>
@@ -29,7 +36,15 @@ namespace Store_RPG_Assignment {
         /// </summary>
         string SortChoice = "";
 
-        //float currency = 35.0f;
+        /// <summary>
+        /// Currency that the player/store has 
+        /// </summary>
+        float currency = 35.0f;
+
+        public float GetCurrency() {
+
+            return currency;
+        }
 
         /// <summary>
         /// Prints all the objects currently in the inventory
@@ -43,6 +58,8 @@ namespace Store_RPG_Assignment {
                                   "Cost: " + Item.Item_Cost + " | " +
                                   "Pages: " + Item.Item_Pages);
             }
+
+            Console.WriteLine($"Current Money: ${currency}");
             Console.WriteLine();
         }
 

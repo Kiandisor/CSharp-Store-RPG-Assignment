@@ -31,7 +31,11 @@
 
                     case Game_Manager.GameState.Exit:
                         PlayGame.RunExitGame();
-                        break;             
+                        break;
+
+                    case Game_Manager.GameState.SuperUser:
+                        PlayGame.RunSuperUser();
+                        break;
                 }
             }
         }

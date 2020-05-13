@@ -3,12 +3,17 @@
 namespace Store_RPG_Assignment {
     class Game_Manager {
 
+        public Game_Manager() {
+        
+            //Put file parser in here
+        
+        }
+
         //Initialise objects
         Menu StartMenu = new Menu(); //Main Menu Object
         Trading_Menu TradeMenu = new Trading_Menu(); //Trading Menu object
         Player_Inventory_List UserInventory = new Player_Inventory_List(); //Player Inventory
         Store_Inventory_List StoreInventory = new Store_Inventory_List(); //Store Inventory
-        Super_User SuperUserAccsess = new Super_User();
 
         /// <summary>
         /// Enum for the state of the game
@@ -90,6 +95,11 @@ namespace Store_RPG_Assignment {
                         CurrentState = GameState.Exit;
                         break;
 
+                    case "super":
+                        //Run the super user command
+                        CurrentState = GameState.SuperUser;
+                        break;
+
                     default:
                         Console.Clear();
                         Console.WriteLine("Please enter a choice from above.");
@@ -108,7 +118,8 @@ namespace Store_RPG_Assignment {
 
                 TradeMenu.ShowTradeMenu();
 
-                TradeMenu.ChangeInventory(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory, TradeMenu.ReturnTradeUserChoice, TradeMenu.ReturnItemAmount, TradeMenu.ReturnTradeToChoice);
+                TradeMenu.ChangeInventory(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory, 
+                    TradeMenu.ReturnTradeUserChoice, TradeMenu.ReturnItemAmount, TradeMenu.ReturnTradeToChoice, ref UserInventory.GetCurrency());
 
                 
 
@@ -168,9 +179,9 @@ namespace Store_RPG_Assignment {
             }
         }
 
-        ///// <summary>
-        ///// Manages the Store Inventory Menu
-        ///// </summary>
+        /// <summary>
+        /// Manages the Store Inventory Menu
+        /// </summary>
         public void RunStoreInventory() {
             while (CurrentState == GameState.StoreInventoryMenu) {
 
@@ -204,11 +215,23 @@ namespace Store_RPG_Assignment {
             }
         }
 
-        public void RunSuperUser() { }
+        /// <summary>
+        /// Manages the Super User Menu
+        /// </summary>
+        public void RunSuperUser() {
+            while (CurrentState == GameState.SuperUser) {
+
+                Super_User NewItem = new Super_User();
+
+                NewItem.AddItemToInventories(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory);
+
+                CurrentState = GameState.Menu;
+            }
+        }
         
-        ///// <summary>
-        ///// Manages how to exit the game
-        ///// </summary>
+        /// <summary>
+        /// Manages how to exit the game
+        /// </summary>
         public void RunExitGame() {
 
             Environment.Exit(0);

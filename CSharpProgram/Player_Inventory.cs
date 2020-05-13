@@ -9,19 +9,20 @@ namespace Store_RPG_Assignment {
         /// <summary>
         /// List of "Inventory" objects
         /// </summary>
-        public List<Inventory_Item> Inventory = new List<Inventory_Item>() {
+        public List<Inventory_Item> Inventory = new List<Inventory_Item>();
 
-        //Art Book
-        new Inventory_Item{ Item_Name = "art book", Item_Amount = 0, Item_Cost = 10, Item_Pages = "50" },
+        ////Art Book
+        //new Inventory_Item("art book", 0, 10, 50),
 
         //Programming Book
-        new Inventory_Item{ Item_Name = "c# book", Item_Amount = 0, Item_Cost = 20, Item_Pages = "150" },
+        //new Inventory_Item("c# book", 0, 20, 150),
 
         //Medic Book
-        new Inventory_Item{ Item_Name = "medic book", Item_Amount = 0, Item_Cost = 15, Item_Pages = "200"},
+        //new Inventory_Item("medic book", 0, 15, 200),
 
         //Note Book
-        new Inventory_Item{ Item_Name = "note book", Item_Amount = 0, Item_Cost = 5, Item_Pages = "50"}
-        };
+        //new Inventory_Item("note book", 0, 5, 50)
+        //};
+
     }
 }
