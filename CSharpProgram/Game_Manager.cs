@@ -1,12 +1,39 @@
 ﻿using System;
+using System.IO;
 
 namespace Store_RPG_Assignment {
     class Game_Manager {
 
         public Game_Manager() {
-        
-            //Put file parser in here
-        
+
+            //Read in the text from the Player_Inventory file
+            string[] PlayerItems = File.ReadAllLines("Player_Inventory.txt");
+
+            for(int Count = 0; Count < PlayerItems.Length; Count++) {
+
+                string[] ItemProperties = PlayerItems[Count].Split('-');
+
+                string name = ItemProperties[0];
+                int amount = int.Parse(ItemProperties[1]);
+                float cost = float.Parse(ItemProperties[2]);
+                int pages = int.Parse(ItemProperties[3]);
+
+                UserInventory.Inventory.Add(new Inventory_Item(name, amount, cost, pages));
+            }
+
+            string[] StoreItems = File.ReadAllLines("Store_Inventory.txt");
+
+            for (int Count = 0; Count < StoreItems.Length; Count++) {
+
+                string[] ItemProperties = StoreItems[Count].Split('-');
+
+                string name = ItemProperties[0];
+                int amount = int.Parse(ItemProperties[1]);
+                float cost = float.Parse(ItemProperties[2]);
+                int pages = int.Parse(ItemProperties[3]);
+
+                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item(name, amount, cost, pages));
+            }
         }
 
         //Initialise objects
@@ -121,8 +148,8 @@ namespace Store_RPG_Assignment {
                 TradeMenu.ChangeInventory(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory, 
                     TradeMenu.ReturnTradeUserChoice, TradeMenu.ReturnItemAmount, TradeMenu.ReturnTradeToChoice);
 
-                
 
+                CurrentState = GameState.Menu;
                 //TradeMenu.ShowTradeMenu();
 
                 ////Switch for the trade menu choice

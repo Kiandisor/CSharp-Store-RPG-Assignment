@@ -11,7 +11,7 @@ namespace Store_RPG_Assignment {
         /// </summary>
         public List<Inventory_Item> Inventory = new List<Inventory_Item>();
 
-        ////Art Book
+        //Art Book
         //new Inventory_Item("art book", 0, 10, 50),
 
         //Programming Book
