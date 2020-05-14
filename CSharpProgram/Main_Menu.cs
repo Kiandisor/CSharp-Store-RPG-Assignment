@@ -43,7 +43,6 @@ namespace Store_RPG_Assignment {
             Console.WriteLine("- Trade with the shop (trade)");
             Console.WriteLine("- View your Inventory (inventory)");
             Console.WriteLine("- View store Inventory (store)");
-            Console.WriteLine("- Save Progress (save)");
             Console.WriteLine("- Quit the game (exit)");
 
             //Get user input

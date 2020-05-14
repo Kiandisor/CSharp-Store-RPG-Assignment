@@ -11,18 +11,10 @@ namespace Store_RPG_Assignment {
         /// </summary>
         public List<Inventory_Item> Inventory = new List<Inventory_Item>();
 
+        //Default books:
         //Art Book
-        //new Inventory_Item("art book", 0, 10, 50),
-
         //Programming Book
-        //new Inventory_Item("c# book", 0, 20, 150),
-
         //Medic Book
-        //new Inventory_Item("medic book", 0, 15, 200),
-
         //Note Book
-        //new Inventory_Item("note book", 0, 5, 50)
-        //};
-
     }
 }

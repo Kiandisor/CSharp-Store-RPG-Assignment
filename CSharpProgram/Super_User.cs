@@ -29,7 +29,7 @@ namespace Store_RPG_Assignment {
         /// <returns></returns>
         public string SetName() {
 
-            Console.WriteLine("Enter the name for the new item: ");
+            Console.WriteLine("Enter the name for the new book: ");
 
             string Name = Console.ReadLine();
 
@@ -42,7 +42,7 @@ namespace Store_RPG_Assignment {
         /// <returns></returns>
         public int SetAmount() {
 
-            Console.WriteLine($"How many {CustomName} should the store and player start with?");
+            Console.WriteLine($"How many {CustomName}(s) should the store and player start with?");
 
             //Gets the users amount
             string sChangeAmount = Console.ReadLine();

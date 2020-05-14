@@ -24,6 +24,22 @@ namespace Store_RPG_Assignment {
         public float Item_Cost;
         //Pages in the book
         public int Item_Pages;
+
+        public string ReturnNameAsString {
+            get { return Item_Name.ToString(); }
+        }
+
+        public string ReturnAmountAsString {
+            get { return Item_Amount.ToString(); }
+        }
+
+        public string ReturnCostAsString {
+            get { return Item_Cost.ToString(); }
+        }
+
+        public string ReturnPagesAsString {
+            get { return Item_Pages.ToString(); }
+        }
     }
 
     /// <summary>

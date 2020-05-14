@@ -4,6 +4,7 @@ using System.IO;
 namespace Store_RPG_Assignment {
     class Game_Manager {
 
+        //Default Constructor that sets up the inventories from the respective files
         public Game_Manager() {
 
             //Read in the text from the Player_Inventory file
@@ -11,28 +12,29 @@ namespace Store_RPG_Assignment {
 
             for(int Count = 0; Count < PlayerItems.Length; Count++) {
 
-                string[] ItemProperties = PlayerItems[Count].Split('-');
+                string[] ItemProperties = PlayerItems[Count].Split('-'); //Splits each line to the array
 
-                string name = ItemProperties[0];
-                int amount = int.Parse(ItemProperties[1]);
-                float cost = float.Parse(ItemProperties[2]);
-                int pages = int.Parse(ItemProperties[3]);
+                string name = ItemProperties[0]; //Assigns the name to the first string in the array
+                int amount = int.Parse(ItemProperties[1]); //Assigns the amount to the second string in the array
+                float cost = float.Parse(ItemProperties[2]); //Assigns the cost to the third string in the array
+                int pages = int.Parse(ItemProperties[3]); //Assigns the pages to the foourth string in the array
 
-                UserInventory.Inventory.Add(new Inventory_Item(name, amount, cost, pages));
+                UserInventory.Inventory.Add(new Inventory_Item(name, amount, cost, pages)); //Adds the item to the player inventory
             }
 
+            //Read in the text from the Player_Inventory file
             string[] StoreItems = File.ReadAllLines("Store_Inventory.txt");
 
             for (int Count = 0; Count < StoreItems.Length; Count++) {
 
-                string[] ItemProperties = StoreItems[Count].Split('-');
+                string[] ItemProperties = StoreItems[Count].Split('-'); //Splits each line to the array
 
-                string name = ItemProperties[0];
-                int amount = int.Parse(ItemProperties[1]);
-                float cost = float.Parse(ItemProperties[2]);
-                int pages = int.Parse(ItemProperties[3]);
+                string name = ItemProperties[0]; //Assigns the name to the first string in the array
+                int amount = int.Parse(ItemProperties[1]); //Assigns the amount to the second string in the array
+                float cost = float.Parse(ItemProperties[2]); //Assigns the cost to the third string in the array
+                int pages = int.Parse(ItemProperties[3]); //Assigns the pages to the foourth string in the array
 
-                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item(name, amount, cost, pages));
+                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item(name, amount, cost, pages)); //Adds the item to the store inventory
             }
         }
 
@@ -260,6 +262,24 @@ namespace Store_RPG_Assignment {
         /// Manages how to exit the game
         /// </summary>
         public void RunExitGame() {
+
+            string[] PlayerItemOutput = new string[UserInventory.Inventory.Count];
+
+            for (int count = 0; count < UserInventory.Inventory.Count; count++) {
+
+                Inventory_Item Item = UserInventory.Inventory[count];
+
+                string name = Item.ReturnNameAsString;
+                string amount = Item.ReturnAmountAsString;
+                string cost = Item.ReturnCostAsString;
+                string pages = Item.ReturnPagesAsString;
+
+                string text = name + "-" + amount + "-" + cost + "-" + pages;
+
+                PlayerItemOutput[count] = text;
+            }
+
+            File.WriteAllLines("C:/Users/nardim/source/repos/C-Store-RPG-Assignment/CSharpProgram/Versions/Debug/netcoreapp3.1/", PlayerItemOutput);
 
             Environment.Exit(0);
         }
