@@ -8,7 +8,7 @@ namespace Store_RPG_Assignment {
         public Game_Manager() {
 
             //Read in the text from the Player_Inventory file
-            string[] PlayerItems = File.ReadAllLines("Player_Inventory.txt");
+            string[] PlayerItems = File.ReadAllLines("PlayerInventory.txt");
 
             for(int Count = 0; Count < PlayerItems.Length; Count++) {
 
@@ -23,7 +23,7 @@ namespace Store_RPG_Assignment {
             }
 
             //Read in the text from the Player_Inventory file
-            string[] StoreItems = File.ReadAllLines("Store_Inventory.txt");
+            string[] StoreItems = File.ReadAllLines("StoreInventory.txt");
 
             for (int Count = 0; Count < StoreItems.Length; Count++) {
 
@@ -32,7 +32,7 @@ namespace Store_RPG_Assignment {
                 string name = ItemProperties[0]; //Assigns the name to the first string in the array
                 int amount = int.Parse(ItemProperties[1]); //Assigns the amount to the second string in the array
                 float cost = float.Parse(ItemProperties[2]); //Assigns the cost to the third string in the array
-                int pages = int.Parse(ItemProperties[3]); //Assigns the pages to the foourth string in the array
+                int pages = int.Parse(ItemProperties[3]); //Assigns the pages to the fourth string in the array
 
                 StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item(name, amount, cost, pages)); //Adds the item to the store inventory
             }
@@ -277,9 +277,27 @@ namespace Store_RPG_Assignment {
                 string text = name + "-" + amount + "-" + cost + "-" + pages;
 
                 PlayerItemOutput[count] = text;
+
+                File.WriteAllLines("PlayerInventory.txt", PlayerItemOutput);
             }
 
-            File.WriteAllLines("C:/Users/nardim/source/repos/C-Store-RPG-Assignment/CSharpProgram/Versions/Debug/netcoreapp3.1/", PlayerItemOutput);
+            string[] StoreItemOutput = new string[StoreInventory.Store_Stock_Inventory.Count];
+
+            for (int count = 0; count < StoreInventory.Store_Stock_Inventory.Count; count++) {
+
+                Inventory_Item Item = StoreInventory.Store_Stock_Inventory[count];
+
+                string name = Item.ReturnNameAsString;
+                string amount = Item.ReturnAmountAsString;
+                string cost = Item.ReturnCostAsString;
+                string pages = Item.ReturnPagesAsString;
+
+                string text = name + "-" + amount + "-" + cost + "-" + pages;
+
+                PlayerItemOutput[count] = text;
+
+                File.WriteAllLines("StoreInventory.txt", StoreItemOutput);
+            }
 
             Environment.Exit(0);
         }
