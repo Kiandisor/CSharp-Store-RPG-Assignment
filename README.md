@@ -8,7 +8,7 @@ The game is a simple text-based store trader which allows the player to purchase
 
 ## Requirements:
 - [x] Items are implemented as a custom class, derived from a common base class.
-- [ ] Load the store and player inventory items from a text file when your program starts.
+- [x] Load the store and player inventory items from a text file when your program starts.
 - [ ] Save the store and player inventory items to a text file before the program exits.
 - [x] Use text commands to list the inventory; buy, sell or inspect items.
 - [x] Include a hidden command to allow a ‘super user’ to add new items to the store.
