@@ -9,7 +9,7 @@ namespace Store_RPG_Assignment {
 
         //Int for the amount to add or subtract from the inventory
         int ChangeAmount = 0;
-
+        
         /// <summary>
         /// Returns the user choice for the trade menu
         /// </summary>
@@ -36,9 +36,9 @@ namespace Store_RPG_Assignment {
         /// <summary>
         /// Prints the menu for selecting which inventory you want to take from
         /// </summary>
-        public void ShowTradeMenu() {
+        public void ShowTradeMenu(List<Inventory_Item> Store) {
 
-            GetItemChoice();
+            GetItemChoice(Store);
 
             GetTo_Or_From();
 
@@ -49,38 +49,30 @@ namespace Store_RPG_Assignment {
         /// Sets the item choice for what the user wants to trade
         /// </summary>
         /// <returns></returns>
-        public string GetItemChoice() {
+        public string GetItemChoice(List<Inventory_Item> Store) {
+
             Console.WriteLine("Welcome to the store!");
             Console.WriteLine("What would you like to trade?");
-            Console.WriteLine("- Art Book");
-            Console.WriteLine("- C# Book");
-            Console.WriteLine("- Medic Book");
-            Console.WriteLine("- Note Book");
+            
+
+            foreach (var Item in Store) {
+
+                Console.WriteLine($"- {Item.Item_Name}");
+            
+            }
 
             ReturnTradeUserChoice = Console.ReadLine().ToLower();
 
-            switch (ReturnTradeUserChoice) {
+            foreach (var CheckName in Store) {
 
-                case "art book":
+                if (CheckName.Item_Name == ReturnTradeUserChoice) {
                     return ReturnTradeUserChoice;
-
-                case "c# book":
-                    return ReturnTradeUserChoice;
-
-                case "medic book":
-                    return ReturnTradeUserChoice;
-
-                case "note book":
-                    return ReturnTradeUserChoice;
-
-                case "Menu":
-                    return ReturnTradeUserChoice;
-
-                default:
-                    Console.Clear();
-                    Console.WriteLine("Please enter a valid item.");
-                    break;
+                }
             }
+
+            Console.Clear();
+            Console.WriteLine("Please enter a valid item.");
+            GetItemChoice(Store);
 
             return ReturnTradeUserChoice;
         }
@@ -228,24 +220,27 @@ namespace Store_RPG_Assignment {
                 //Check each item in the store inventory
                 foreach (var StoreValueChange in StoreChange) {
 
-                    //If the user choice is the in the list, trade the item
+                    //If the item is not in the inventory then keep looping 
                     if (ItemChoice != StoreValueChange.Item_Name) {
-
+                        
                         continue;
                     }
 
+                    //If there are no items then it is out of stock
                     if (StoreValueChange.Item_Amount == 0) {
 
                         OutOfStock(To_Or_From);
                         break;
                     }
 
+                    //If the amount wanted is greater than the amount the inventory has trade for the remainder
                     if (ChangeAmount > StoreValueChange.Item_Amount && StoreValueChange.Item_Amount != 0) {
 
                         TradedRemainder(ref StoreValueChange.Item_Amount, ref Amount, To_Or_From);
                         break;
                     }
 
+                    //If the user choice is the in the list, trade the item
                     else {
                         PurchaseItem(ref StoreValueChange.Item_Amount, Amount, To_Or_From);
                     }
@@ -265,24 +260,27 @@ namespace Store_RPG_Assignment {
                 //Check each item in the store inventory
                 foreach (var PlayerValueChange in PlayerChange) {
 
-                    //If the user choice is the in the list, trade the item
+                    //If the item is not in the inventory then keep looping 
                     if (ItemChoice != PlayerValueChange.Item_Name) {
 
                         continue;
                     }
 
+                    //If there are no items then it is out of stock
                     if (PlayerValueChange.Item_Amount == 0) {
 
                         OutOfStock(To_Or_From);
                         break;
                     }
 
+                    //If the amount wanted is greater than the amount the inventory has trade for the remainder
                     if (ChangeAmount > PlayerValueChange.Item_Amount && PlayerValueChange.Item_Amount != 0) {
 
                         TradedRemainder(ref PlayerValueChange.Item_Amount, ref Amount, To_Or_From);
                         break;
                     }
 
+                    //If the user choice is the in the list, trade the item
                     else {
                         PurchaseItem(ref PlayerValueChange.Item_Amount, Amount, To_Or_From);
                     }

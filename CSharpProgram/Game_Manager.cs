@@ -22,7 +22,7 @@ namespace Store_RPG_Assignment {
                 UserInventory.Inventory.Add(new Inventory_Item(name, amount, cost, pages)); //Adds the item to the player inventory
             }
 
-            //Read in the text from the Player_Inventory file
+            //Read in the text from the Store_Inventory file
             string[] StoreItems = File.ReadAllLines("StoreInventory.txt");
 
             for (int Count = 0; Count < StoreItems.Length; Count++) {
@@ -145,7 +145,7 @@ namespace Store_RPG_Assignment {
             //Run the trade menu while the gamestate is trade
             while (CurrentState == GameState.Trade) {
 
-                TradeMenu.ShowTradeMenu();
+                TradeMenu.ShowTradeMenu(StoreInventory.Store_Stock_Inventory);
 
                 TradeMenu.ChangeInventory(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory, 
                     TradeMenu.ReturnTradeUserChoice, TradeMenu.ReturnItemAmount, TradeMenu.ReturnTradeToChoice);
@@ -265,9 +265,9 @@ namespace Store_RPG_Assignment {
 
             string[] PlayerItemOutput = new string[UserInventory.Inventory.Count];
 
-            for (int count = 0; count < UserInventory.Inventory.Count; count++) {
+            foreach (var Item in UserInventory.Inventory) {;
 
-                Inventory_Item Item = UserInventory.Inventory[count];
+                int count = 0;
 
                 string name = Item.ReturnNameAsString;
                 string amount = Item.ReturnAmountAsString;
@@ -277,27 +277,27 @@ namespace Store_RPG_Assignment {
                 string text = name + "-" + amount + "-" + cost + "-" + pages;
 
                 PlayerItemOutput[count] = text;
-
-                File.WriteAllLines("PlayerInventory.txt", PlayerItemOutput);
             }
 
             string[] StoreItemOutput = new string[StoreInventory.Store_Stock_Inventory.Count];
 
-            for (int count = 0; count < StoreInventory.Store_Stock_Inventory.Count; count++) {
+            foreach (var Item in StoreInventory.Store_Stock_Inventory) {
 
-                Inventory_Item Item = StoreInventory.Store_Stock_Inventory[count];
+                int count = 0;
 
-                string name = Item.ReturnNameAsString;
+                string name = Item.Item_Name;
                 string amount = Item.ReturnAmountAsString;
                 string cost = Item.ReturnCostAsString;
                 string pages = Item.ReturnPagesAsString;
 
                 string text = name + "-" + amount + "-" + cost + "-" + pages;
 
-                PlayerItemOutput[count] = text;
-
-                File.WriteAllLines("StoreInventory.txt", StoreItemOutput);
+                StoreItemOutput[count] = text;
             }
+
+            File.WriteAllLines("C:/Users/User/Documents/GitHub/CSharp-Store-RPG-Assignment/CSharpProgram/Versions/Debug/netcoreapp3.1/PlayerInventoryOut.txt", PlayerItemOutput);
+
+            File.WriteAllLines("C:/Users/User/Documents/GitHub/CSharp-Store-RPG-Assignment/CSharpProgram/Versions/Debug/netcoreapp3.1/StoreInventoryOut.txt", StoreItemOutput);
 
             Environment.Exit(0);
         }
