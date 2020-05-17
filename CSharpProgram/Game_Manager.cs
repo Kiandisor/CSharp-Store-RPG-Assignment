@@ -152,23 +152,6 @@ namespace Store_RPG_Assignment {
 
 
                 CurrentState = GameState.Menu;
-                //TradeMenu.ShowTradeMenu();
-
-                ////Switch for the trade menu choice
-                //switch (TradeMenu.ReturnTradeToChoice()) {
-
-                //    case "to":
-                //        TradeMenu.ChangeInventory(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory, TradeMenu.GetItemChoice(), TradeMenu.TradeItemAmount(), TradeMenu.GetTo_Or_From());
-                //        break;
-
-                //    case "from":
-                //        TradeMenu.ChangeInventory(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory, TradeMenu.ReturnTradeUserChoice(), TradeMenu.TradeItemAmount(), true);
-                //        break;
-
-                //    case "menu":
-                //        CurrentState = GameState.Menu;
-                //        Console.Clear();
-                //        break;
             }
         }
 
