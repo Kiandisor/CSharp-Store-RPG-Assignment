@@ -52,7 +52,7 @@ namespace Store_RPG_Assignment {
         /// </summary>
         string SortChoice = "";
 
-        float Currency = 35.0f;
+        public float Currency { get; private set; } = 35.0f;
         
         /// <summary>
         /// Prints all the objects currently in the inventory

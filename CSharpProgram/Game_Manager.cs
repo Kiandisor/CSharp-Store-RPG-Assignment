@@ -148,7 +148,7 @@ namespace Store_RPG_Assignment {
                 TradeMenu.ShowTradeMenu(StoreInventory.Store_Stock_Inventory);
 
                 TradeMenu.ChangeInventory(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory, 
-                    TradeMenu.ReturnTradeUserChoice, TradeMenu.ReturnItemAmount, TradeMenu.ReturnTradeToChoice, ref UserInventory.Currency, ref StoreInventory.Currency);
+                    TradeMenu.ReturnTradeUserChoice, TradeMenu.ReturnItemAmount, TradeMenu.ReturnTradeToChoice, UserInventory.Currency);
 
 
                 CurrentState = GameState.Menu;
