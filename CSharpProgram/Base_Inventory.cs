@@ -52,18 +52,8 @@ namespace Store_RPG_Assignment {
         /// </summary>
         string SortChoice = "";
 
-        /// <summary>
-        /// Currency that the player/store has 
-        /// </summary>
-        float currency = 35.0f;
-
-        public float GetCurrency {
-
-            get {
-                return currency;
-            }
-        }
-
+        float Currency = 35.0f;
+        
         /// <summary>
         /// Prints all the objects currently in the inventory
         /// </summary>
@@ -77,7 +67,7 @@ namespace Store_RPG_Assignment {
                                   "Pages: " + Item.Item_Pages);
             }
 
-            Console.WriteLine($"Current Money: ${currency}");
+            Console.WriteLine($"Current Money: ${Currency}");
             Console.WriteLine();
         }
 

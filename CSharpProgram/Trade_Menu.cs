@@ -7,8 +7,12 @@ namespace Store_RPG_Assignment {
     /// </summary>
     class Trading_Menu {
 
-        //Int for the amount to add or subtract from the inventory
+        /// <summary>
+        /// Int for the amount to add or subtract from the inventory
+        /// </summary>
         int ChangeAmount = 0;
+
+        float CostOfItem = 0;
         
         /// <summary>
         /// Returns the user choice for the trade menu
@@ -66,6 +70,9 @@ namespace Store_RPG_Assignment {
             foreach (var CheckName in Store) {
 
                 if (CheckName.Item_Name == ReturnTradeUserChoice) {
+
+                    CheckName.Item_Cost = CostOfItem;   
+
                     return ReturnTradeUserChoice;
                 }
             }
@@ -94,6 +101,9 @@ namespace Store_RPG_Assignment {
             if (CheckParse == true) {
 
                 ChangeAmount = int.Parse(sChangeAmount);
+
+                CostOfItem *= ChangeAmount;
+
                 return ChangeAmount;
             }
 
@@ -160,7 +170,7 @@ namespace Store_RPG_Assignment {
         /// <param name="AmountInInventory"></param>
         /// <param name="amount"></param>
         /// <param name="PlayerOrStore"></param>
-        public void TradedRemainder(ref int AmountInInventory, ref int amount, bool PlayerOrStore) {
+        public void TradedRemainder(ref int AmountInInventory, ref int amount, bool PlayerOrStore, float PlayerCurrency) {
 
             if (PlayerOrStore == true) {
                 Console.WriteLine($"You wanted to trade {amount} {ReturnTradeUserChoice} but the shop only had {AmountInInventory}.");
@@ -169,6 +179,8 @@ namespace Store_RPG_Assignment {
                 amount = AmountInInventory;
 
                 AmountInInventory -= amount;
+
+                PlayerCurrency -= CostOfItem;
 
                 Console.WriteLine();
             }
@@ -191,7 +203,7 @@ namespace Store_RPG_Assignment {
         /// <param name="AmountInInventory"></param>
         /// <param name="amount"></param>
         /// <param name="PlayerOrStore"></param>
-        public void PurchaseItem(ref int AmountInInventory, int amount, bool PlayerOrStore) {
+        public void PurchaseItem(ref int AmountInInventory, int amount, bool PlayerOrStore, float PlayerCurrency) {
             if (PlayerOrStore == true) {
                 AmountInInventory -= amount;
                 Console.WriteLine($"You have traded for {amount} {ReturnTradeUserChoice}(s).");
@@ -214,7 +226,7 @@ namespace Store_RPG_Assignment {
         /// <param name="StoreChange"></param>
         /// <param name="ChangeAmount"></param>
         /// <param name="To_Or_From"></param>
-        public void ChangeInventory(ref List<Inventory_Item> PlayerChange, ref List<Inventory_Item> StoreChange, string ItemChoice, int Amount, bool To_Or_From) {
+        public void ChangeInventory(ref List<Inventory_Item> PlayerChange, ref List<Inventory_Item> StoreChange, string ItemChoice, int Amount, bool To_Or_From, float PlayerCurrency) {
 
             if (To_Or_From == true) {
                 //Check each item in the store inventory
@@ -236,13 +248,13 @@ namespace Store_RPG_Assignment {
                     //If the amount wanted is greater than the amount the inventory has trade for the remainder
                     if (ChangeAmount > StoreValueChange.Item_Amount && StoreValueChange.Item_Amount != 0) {
 
-                        TradedRemainder(ref StoreValueChange.Item_Amount, ref Amount, To_Or_From);
+                        TradedRemainder(ref StoreValueChange.Item_Amount, ref Amount, To_Or_From, PlayerCurrency);
                         break;
                     }
 
                     //If the user choice is the in the list, trade the item
                     else {
-                        PurchaseItem(ref StoreValueChange.Item_Amount, Amount, To_Or_From);
+                        PurchaseItem(ref StoreValueChange.Item_Amount, Amount, To_Or_From, PlayerCurrency);
                     }
                 }
 
@@ -276,13 +288,13 @@ namespace Store_RPG_Assignment {
                     //If the amount wanted is greater than the amount the inventory has trade for the remainder
                     if (ChangeAmount > PlayerValueChange.Item_Amount && PlayerValueChange.Item_Amount != 0) {
 
-                        TradedRemainder(ref PlayerValueChange.Item_Amount, ref Amount, To_Or_From);
+                        TradedRemainder(ref PlayerValueChange.Item_Amount, ref Amount, To_Or_From, PlayerCurrency);
                         break;
                     }
 
                     //If the user choice is the in the list, trade the item
                     else {
-                        PurchaseItem(ref PlayerValueChange.Item_Amount, Amount, To_Or_From);
+                        PurchaseItem(ref PlayerValueChange.Item_Amount, Amount, To_Or_From, PlayerCurrency);
                     }
                 }
 
