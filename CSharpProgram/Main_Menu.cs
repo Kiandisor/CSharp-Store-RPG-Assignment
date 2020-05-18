@@ -1,6 +1,7 @@
 ﻿using System;
 
 namespace Store_RPG_Assignment {
+
     /// <summary>
     /// Functions and variables for the main menu
     /// </summary>

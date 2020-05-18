@@ -2,8 +2,13 @@
 using System.Collections.Generic;
 
 namespace Store_RPG_Assignment {
+
+    /// <summary>
+    /// Functions and variables for the super user
+    /// </summary>
     class Super_User {
 
+        //Constructor of the super_user to create a new item for both inventories
         public Super_User() {
 
             CustomName = SetName();
@@ -17,6 +22,11 @@ namespace Store_RPG_Assignment {
         float CustomCost = 0f;
         int CustomPages = 0;
 
+        /// <summary>
+        /// Adds the new item creaded to both inventories
+        /// </summary>
+        /// <param name="PlayerInventor"></param>
+        /// <param name="StoreInventor"></param>
         public void AddItemToInventories(ref List<Inventory_Item> PlayerInventor, ref List<Inventory_Item> StoreInventor) {
             PlayerInventor.Add(new Inventory_Item(CustomName, CustomAmount, CustomCost, CustomPages));
 
@@ -75,7 +85,7 @@ namespace Store_RPG_Assignment {
             //Gets the users amount
             string sChangeAmount = Console.ReadLine();
 
-            //Bool to check if the users input can be parsed to a int
+            //Bool to check if the users input can be parsed to a float
             bool CheckParse = float.TryParse(sChangeAmount, out CustomCost);
             //If it can be parsed, set the ChangeAmount to the value of the string
             if (CheckParse == true) {

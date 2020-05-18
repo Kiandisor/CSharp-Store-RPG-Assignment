@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 
 namespace Store_RPG_Assignment {
+
     /// <summary>
     /// Base class for making an item
     /// </summary>
     class Inventory_Item {
 
+        //Constructor for making an inventory item, must provide all fields to make an item
         public Inventory_Item(string name, int amount, float cost, int pages) {
 
             Item_Name = name;
@@ -25,18 +27,30 @@ namespace Store_RPG_Assignment {
         //Pages in the book
         public int Item_Pages;
 
+        /// <summary>
+        /// Returns the name of the object as a string
+        /// </summary>
         public string ReturnNameAsString {
             get { return Item_Name.ToString(); }
         }
 
+        /// <summary>
+        /// Returns the amount owned as a string
+        /// </summary>
         public string ReturnAmountAsString {
             get { return Item_Amount.ToString(); }
         }
 
+        /// <summary>
+        /// Returns the cost of the item as a string
+        /// </summary>
         public string ReturnCostAsString {
             get { return Item_Cost.ToString(); }
         }
 
+        /// <summary>
+        /// Return the pages of the item as a string
+        /// </summary>
         public string ReturnPagesAsString {
             get { return Item_Pages.ToString(); }
         }
@@ -52,19 +66,22 @@ namespace Store_RPG_Assignment {
         /// </summary>
         string SortChoice = "";
 
+        //Currency of the player which changes depending on trades
         public float Currency { get; private set; } = 35.0f;
         
         /// <summary>
-        /// Prints all the objects currently in the inventory
+        /// Virtual function that can be changed. Prints all the objects currently in the inventory
         /// </summary>
         /// <param name="Player_inventor"></param>
-        public void PrintInventory(List<Inventory_Item> Print_Inventory) {
-            //Prints out each of the objects in the player inventory
+        public virtual void PrintInventory(List<Inventory_Item> Print_Inventory) {
+            //Prints out each of the objects in the inventory
             foreach (var Item in Print_Inventory) {
-                Console.WriteLine("Name: " + Item.Item_Name + " | " +
-                                  "Amount: " + Item.Item_Amount + " | " +
-                                  "Cost: " + Item.Item_Cost + " | " +
-                                  "Pages: " + Item.Item_Pages);
+                Console.WriteLine(
+                    "Name: " + Item.Item_Name + " | " +
+                    "Amount: " + Item.Item_Amount + " | " +
+                    "Cost: " + Item.Item_Cost + " | " +
+                    "Pages: " + Item.Item_Pages
+                );
             }
 
             Console.WriteLine($"Current Money: ${Currency}");
