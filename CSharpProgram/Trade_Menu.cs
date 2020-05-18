@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 namespace Store_RPG_Assignment {
+
     /// <summary>
     /// Functions and variables for the trading menu
     /// </summary>
@@ -12,6 +13,9 @@ namespace Store_RPG_Assignment {
         /// </summary>
         int ChangeAmount = 0;
 
+        /// <summary>
+        /// float to hold the cost of the item selected
+        /// </summary>
         float CostOfItem = 0;
         
         /// <summary>
@@ -97,12 +101,12 @@ namespace Store_RPG_Assignment {
 
             //Bool to check if the users input can be parsed to a int
             bool CheckParse = int.TryParse(sChangeAmount, out ChangeAmount);
+
             //If it can be parsed, set the ChangeAmount to the value of the string
             if (CheckParse == true) {
 
+                //Parse the string to int
                 ChangeAmount = int.Parse(sChangeAmount);
-
-                CostOfItem *= ChangeAmount;
 
                 return ChangeAmount;
             }
@@ -125,17 +129,22 @@ namespace Store_RPG_Assignment {
             Console.WriteLine("- To the store (to)");
             Console.WriteLine("- From the store (from)");
 
+            //String to hold the users choice
             string TradeToChoice = "";
 
             TradeToChoice = Console.ReadLine().ToLower();
 
+            //Switch statement to decide if the input is valid or not. Will set the bool for if the player is trading to the store or from it
             switch (TradeToChoice) {
+                //Player is trading to the store
                 case "to":
                     ReturnTradeToChoice = false;
                     break;
+                //Player is trading from the store
                 case "from":
                     ReturnTradeToChoice = true;
                     break;
+                //The input was not valid and will prompt the user for another input
                 default:
                     Console.Clear();
                     Console.WriteLine("Please enter a valid input");
@@ -151,12 +160,14 @@ namespace Store_RPG_Assignment {
         /// </summary>
         public void OutOfStock(bool PlayerOrStore) {
             
+            //If the player wants to trade from the store
             if (PlayerOrStore == true) {
                 Console.Clear();
                 Console.WriteLine($"The {ReturnTradeUserChoice} is currently out of stock.");
                 Console.WriteLine();
             }
 
+            //If the player wants to trade to the store
             else {
                 Console.Clear();
                 Console.WriteLine($"You don't have any {ReturnTradeUserChoice}s.");
@@ -172,26 +183,42 @@ namespace Store_RPG_Assignment {
         /// <param name="PlayerOrStore"></param>
         public void TradedRemainder(ref int AmountInInventory, ref int amount, bool PlayerOrStore, float PlayerCurrency) {
 
+            //If the player wants to trade from the store
             if (PlayerOrStore == true) {
                 Console.WriteLine($"You wanted to trade {amount} {ReturnTradeUserChoice} but the shop only had {AmountInInventory}.");
                 Console.WriteLine($"You ended up trading for the rest of their stock instead ({AmountInInventory}).");
 
+                //Sets the amount to be traded to the amount in the store inventory
                 amount = AmountInInventory;
 
+                //Sets the Cost of the item equal to the amount x the cost 
+                CostOfItem *= amount;
+
+                //Takes the remainder of the items in the store inventory
                 AmountInInventory -= amount;
 
+                //Takes the remainder of the currency from the player
                 PlayerCurrency -= CostOfItem;
 
                 Console.WriteLine();
             }
 
+            //If the player wants to trade to the store
             else {
                 Console.WriteLine($"You wanted to trade {amount} {ReturnTradeUserChoice} to the shop but only had {AmountInInventory}.");
                 Console.WriteLine($"You ended up trading the rest of the {ReturnTradeUserChoice}(s) you had.");
 
+                //Sets the amount to be traded to the amount in the Player inventory
                 amount = AmountInInventory;
 
+                //Sets the Cost of the item equal to the amount x the cost 
+                CostOfItem *= amount;
+
+                //Takes the remainder of the items in the player inventory
                 AmountInInventory -= amount;
+
+                //Adds the remainder of the currency from the player
+                PlayerCurrency += CostOfItem;
 
                 Console.WriteLine();
             }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 namespace Store_RPG_Assignment {
+
     /// <summary>
     /// The player inventory with functions inherited from the base inventory functions
     /// </summary>
