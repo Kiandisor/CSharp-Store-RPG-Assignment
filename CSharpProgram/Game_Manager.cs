@@ -48,10 +48,17 @@ namespace Store_RPG_Assignment {
             //If the files don't exist add the default items to both inventories
             else {
 
+                //Adds the default books to the player inventory
                 UserInventory.Inventory.Add(new Inventory_Item("art book", 0, 3.2f, 20));
-                UserInventory.Inventory.Add(new Inventory_Item("art book", 0, 3.2f, 20));
-                UserInventory.Inventory.Add(new Inventory_Item("art book", 0, 3.2f, 20));
-                UserInventory.Inventory.Add(new Inventory_Item("art book", 0, 3.2f, 20));
+                UserInventory.Inventory.Add(new Inventory_Item("programming book", 0, 3.2f, 20));
+                UserInventory.Inventory.Add(new Inventory_Item("medic book", 0, 3.2f, 20));
+                UserInventory.Inventory.Add(new Inventory_Item("note book", 0, 3.2f, 20));
+
+                //Adds the default books to the store inventory
+                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item("art book", 15, 3.2f, 20));
+                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item("programming book", 15, 3.2f, 20));
+                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item("medic book", 15, 3.2f, 20));
+                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item("note book", 15, 3.2f, 20));
             }
         }
 
@@ -162,19 +169,32 @@ namespace Store_RPG_Assignment {
             //Run the trade menu while the gamestate is trade
             while (CurrentState == GameState.Trade) {
 
-                TradeMenu.ShowTradeMenu(StoreInventory.Store_Stock_Inventory);
+                TradeMenu.GetItemChoice(StoreInventory.Store_Stock_Inventory);
 
-                TradeMenu.ChangeInventory(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory, 
-                    TradeMenu.ReturnTradeUserChoice, TradeMenu.ReturnItemAmount, TradeMenu.ReturnTradeToChoice, UserInventory.Currency);
+                if (TradeMenu.ReturnTradeUserChoice != "menu") {
+
+                    TradeMenu.GetTo_Or_From();
+
+                    TradeMenu.GetAmount();
+
+                    TradeMenu.ChangeInventory(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory,
+                        TradeMenu.ReturnTradeUserChoice, TradeMenu.ReturnItemAmount, TradeMenu.ReturnTradeToChoice, ref UserInventory.Currency);
 
 
-                CurrentState = GameState.Menu;
+                    CurrentState = GameState.Menu;
+                }
+
+                else {
+
+                    Console.Clear();
+                    CurrentState = GameState.Menu;
+                }
             }
         }
 
-        ///// <summary>
-        ///// Manages the Player Inventory Menu
-        ///// </summary>
+        /// <summary>
+        /// Manages the Player Inventory Menu
+        /// </summary>
         public void RunPlayerInventory() {
             while (CurrentState == GameState.PlayerInventoryMenu) {
 

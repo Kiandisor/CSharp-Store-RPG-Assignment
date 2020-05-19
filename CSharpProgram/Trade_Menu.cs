@@ -44,14 +44,14 @@ namespace Store_RPG_Assignment {
         /// <summary>
         /// Prints the menu for selecting which inventory you want to take from
         /// </summary>
-        public void ShowTradeMenu(List<Inventory_Item> Store) {
+        //public void ShowTradeMenu(List<Inventory_Item> Store) {
 
-            GetItemChoice(Store);
+        //    GetItemChoice(Store);
 
-            GetTo_Or_From();
+        //    GetTo_Or_From();
 
-            GetAmount();
-        }
+        //    GetAmount();
+        //}
 
         /// <summary>
         /// Sets the item choice for what the user wants to trade
@@ -69,13 +69,20 @@ namespace Store_RPG_Assignment {
             
             }
 
+            Console.WriteLine("- Main Menu (menu)");
+
             ReturnTradeUserChoice = Console.ReadLine().ToLower();
 
             foreach (var CheckName in Store) {
 
+                if (ReturnTradeUserChoice == "menu") {
+
+                    return ReturnTradeUserChoice;
+                }
+
                 if (CheckName.Item_Name == ReturnTradeUserChoice) {
 
-                    CheckName.Item_Cost = CostOfItem;   
+                    CostOfItem = CheckName.Item_Cost;   
 
                     return ReturnTradeUserChoice;
                 }
@@ -181,7 +188,7 @@ namespace Store_RPG_Assignment {
         /// <param name="AmountInInventory"></param>
         /// <param name="amount"></param>
         /// <param name="PlayerOrStore"></param>
-        public void TradedRemainder(ref int AmountInInventory, ref int amount, bool PlayerOrStore, float PlayerCurrency) {
+        public void TradedRemainder(ref int AmountInInventory, ref int amount, bool PlayerOrStore, ref float PlayerCurrency) {
 
             //If the player wants to trade from the store
             if (PlayerOrStore == true) {
@@ -230,17 +237,36 @@ namespace Store_RPG_Assignment {
         /// <param name="AmountInInventory"></param>
         /// <param name="amount"></param>
         /// <param name="PlayerOrStore"></param>
-        public void PurchaseItem(ref int AmountInInventory, int amount, bool PlayerOrStore, float PlayerCurrency) {
+        public void PurchaseItem(ref int AmountInInventory, int amount, bool PlayerOrStore, ref float PlayerCurrency) {
+
+            //If the player trades from the store
             if (PlayerOrStore == true) {
+
+                //Takes the amount of items from the store
                 AmountInInventory -= amount;
                 Console.WriteLine($"You have traded for {amount} {ReturnTradeUserChoice}(s).");
+
+                //Calculates the total cost
+                CostOfItem *= amount;
+
+                //Takes the amount of money from the player
+                PlayerCurrency -= CostOfItem;
 
                 Console.WriteLine();
             }
 
+            //If the player trades to the store
             else {
+
+                //Takes the amount of items from the player
                 AmountInInventory -= amount;
                 Console.WriteLine($"You have traded back {amount} {ReturnTradeUserChoice}(s).");
+
+                //Calculates the total cost
+                CostOfItem *= amount;
+
+                //Adds the amount of money to the player
+                PlayerCurrency += CostOfItem;
 
                 Console.WriteLine();
             }
@@ -253,8 +279,9 @@ namespace Store_RPG_Assignment {
         /// <param name="StoreChange"></param>
         /// <param name="ChangeAmount"></param>
         /// <param name="To_Or_From"></param>
-        public void ChangeInventory(ref List<Inventory_Item> PlayerChange, ref List<Inventory_Item> StoreChange, string ItemChoice, int Amount, bool To_Or_From, float PlayerCurrency) {
+        public void ChangeInventory(ref List<Inventory_Item> PlayerChange, ref List<Inventory_Item> StoreChange, string ItemChoice, int Amount, bool To_Or_From, ref float PlayerCurrency) {
 
+            //If the player is trading from the store
             if (To_Or_From == true) {
                 //Check each item in the store inventory
                 foreach (var StoreValueChange in StoreChange) {
@@ -275,13 +302,13 @@ namespace Store_RPG_Assignment {
                     //If the amount wanted is greater than the amount the inventory has trade for the remainder
                     if (ChangeAmount > StoreValueChange.Item_Amount && StoreValueChange.Item_Amount != 0) {
 
-                        TradedRemainder(ref StoreValueChange.Item_Amount, ref Amount, To_Or_From, PlayerCurrency);
+                        TradedRemainder(ref StoreValueChange.Item_Amount, ref Amount, To_Or_From, ref PlayerCurrency);
                         break;
                     }
 
                     //If the user choice is the in the list, trade the item
                     else {
-                        PurchaseItem(ref StoreValueChange.Item_Amount, Amount, To_Or_From, PlayerCurrency);
+                        PurchaseItem(ref StoreValueChange.Item_Amount, Amount, To_Or_From, ref PlayerCurrency);
                     }
                 }
 
@@ -295,6 +322,7 @@ namespace Store_RPG_Assignment {
                 }
             }
 
+            //If the player is trading to the store
             else {
                 //Check each item in the store inventory
                 foreach (var PlayerValueChange in PlayerChange) {
@@ -315,13 +343,13 @@ namespace Store_RPG_Assignment {
                     //If the amount wanted is greater than the amount the inventory has trade for the remainder
                     if (ChangeAmount > PlayerValueChange.Item_Amount && PlayerValueChange.Item_Amount != 0) {
 
-                        TradedRemainder(ref PlayerValueChange.Item_Amount, ref Amount, To_Or_From, PlayerCurrency);
+                        TradedRemainder(ref PlayerValueChange.Item_Amount, ref Amount, To_Or_From, ref PlayerCurrency);
                         break;
                     }
 
                     //If the user choice is the in the list, trade the item
                     else {
-                        PurchaseItem(ref PlayerValueChange.Item_Amount, Amount, To_Or_From, PlayerCurrency);
+                        PurchaseItem(ref PlayerValueChange.Item_Amount, Amount, To_Or_From, ref PlayerCurrency);
                     }
                 }
 

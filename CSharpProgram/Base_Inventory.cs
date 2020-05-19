@@ -67,7 +67,7 @@ namespace Store_RPG_Assignment {
         string SortChoice = "";
 
         //Currency of the player which changes depending on trades
-        public float Currency { get; private set; } = 35.0f;
+        public float Currency = 35.0f;
         
         /// <summary>
         /// Virtual function that can be changed. Prints all the objects currently in the inventory
