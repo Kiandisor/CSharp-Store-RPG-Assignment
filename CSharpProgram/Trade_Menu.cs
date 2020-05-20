@@ -62,7 +62,7 @@ namespace Store_RPG_Assignment {
             Console.WriteLine("Welcome to the store!");
             Console.WriteLine("What would you like to trade?");
             
-
+            //Print our each of the items name in the store inventory
             foreach (var Item in Store) {
 
                 Console.WriteLine($"- {Item.Item_Name}");
@@ -71,23 +71,30 @@ namespace Store_RPG_Assignment {
 
             Console.WriteLine("- Main Menu (menu)");
 
+            //Gets the user input makes it 
             ReturnTradeUserChoice = Console.ReadLine().ToLower();
 
+            //Check each item in the store
             foreach (var CheckName in Store) {
 
+                //If the player input is menu then return that value
                 if (ReturnTradeUserChoice == "menu") {
 
                     return ReturnTradeUserChoice;
                 }
 
+                //If the name of the item is the same as one in the inventory
                 if (CheckName.Item_Name == ReturnTradeUserChoice) {
 
+                    //Set CostOfItem to the price of the item in the inventory
                     CostOfItem = CheckName.Item_Cost;   
 
+                    //Return the item name
                     return ReturnTradeUserChoice;
                 }
             }
 
+            //If the player input is not valid ask for another one
             Console.Clear();
             Console.WriteLine("Please enter a valid item.");
             GetItemChoice(Store);
