@@ -12,10 +12,10 @@ namespace Store_RPG_Assignment {
         public Game_Manager() {
 
             //If both inventory files exist read from both of them and add them to the inventories
-            if (File.Exists("PlayerInventory.txt") && File.Exists("StoreInventory.txt")) {
+            if (File.Exists("Player_Inventory.txt") == true && File.Exists("Store_Inventory.txt") == true) {
 
                 //Read in the text from the Player_Inventory file
-                string[] PlayerItems = File.ReadAllLines("PlayerInventory.txt");
+                string[] PlayerItems = File.ReadAllLines("Player_Inventory.txt");
 
                 for (int Count = 0; Count < PlayerItems.Length; Count++) {
 
@@ -30,7 +30,7 @@ namespace Store_RPG_Assignment {
                 }
 
                 //Read in the text from the Store_Inventory file
-                string[] StoreItems = File.ReadAllLines("StoreInventory.txt");
+                string[] StoreItems = File.ReadAllLines("Store_Inventory.txt");
 
                 for (int Count = 0; Count < StoreItems.Length; Count++) {
 
@@ -55,10 +55,10 @@ namespace Store_RPG_Assignment {
                 UserInventory.Inventory.Add(new Inventory_Item("note book", 0, 3.2f, 20));
 
                 //Adds the default books to the store inventory
-                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item("art book", 15, 3.2f, 20));
-                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item("programming book", 15, 3.2f, 20));
-                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item("medic book", 15, 3.2f, 20));
-                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item("note book", 15, 3.2f, 20));
+                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item("art book", 15, 2.2f, 20));
+                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item("programming book", 15, 4.1f, 20));
+                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item("medic book", 15, 10.2f, 20));
+                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item("note book", 15, 1.5f, 20));
             }
         }
 
@@ -285,7 +285,7 @@ namespace Store_RPG_Assignment {
 
             string[] PlayerItemOutput = new string[UserInventory.Inventory.Count];
 
-            foreach (var Item in UserInventory.Inventory) {;
+            foreach (var Item in UserInventory.Inventory) {
 
                 int count = 0;
 
@@ -297,6 +297,8 @@ namespace Store_RPG_Assignment {
                 string text = name + "-" + amount + "-" + cost + "-" + pages;
 
                 PlayerItemOutput[count] = text;
+
+                File.WriteAllLines("PlayerInventoryOut.txt", PlayerItemOutput);
             }
 
             string[] StoreItemOutput = new string[StoreInventory.Store_Stock_Inventory.Count];
@@ -313,13 +315,9 @@ namespace Store_RPG_Assignment {
                 string text = name + "-" + amount + "-" + cost + "-" + pages;
 
                 StoreItemOutput[count] = text;
+
+                File.WriteAllLines("StoreInventoryOut.txt", StoreItemOutput);
             }
-
-            File.WriteAllLines("C:/Users/User/Documents/GitHub/CSharp-Store-RPG-Assignment/CSharpProgram/Versions/Debug/netcoreapp3.1/PlayerInventoryOut.txt", PlayerItemOutput);
-
-            File.WriteAllLines("C:/Users/User/Documents/GitHub/CSharp-Store-RPG-Assignment/CSharpProgram/Versions/Debug/netcoreapp3.1/StoreInventoryOut.txt", StoreItemOutput);
-
-            Environment.Exit(0);
         }
     }
 }

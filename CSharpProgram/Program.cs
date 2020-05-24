@@ -8,8 +8,11 @@
             //Initialize Game Manager
             Game_Manager PlayGame = new Game_Manager();
 
+            //Bool to control the game loop
+            bool RunGame = true;
+
             //Run the loop until the player wants to exit
-            while (PlayGame.CurrentState != Game_Manager.GameState.Exit) {
+            while (RunGame != false) {
 
                 switch (PlayGame.CurrentState) {
 
@@ -41,6 +44,7 @@
                     //Exit the game
                     case Game_Manager.GameState.Exit:
                         PlayGame.RunExitGame();
+                        RunGame = false;
                         break;
                     
                     //Accsess the super user
