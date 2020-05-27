@@ -285,39 +285,41 @@ namespace Store_RPG_Assignment {
 
             string[] PlayerItemOutput = new string[UserInventory.Inventory.Count];
 
-            foreach (var Item in UserInventory.Inventory) {
+            for (int count = 1; count <= PlayerItemOutput.Length; count++) {
 
-                int count = 0;
+                foreach (var Item in UserInventory.Inventory) {
 
-                string name = Item.ReturnNameAsString;
-                string amount = Item.ReturnAmountAsString;
-                string cost = Item.ReturnCostAsString;
-                string pages = Item.ReturnPagesAsString;
+                    string name = Item.ReturnNameAsString;
+                    string amount = Item.ReturnAmountAsString;
+                    string cost = Item.ReturnCostAsString;
+                    string pages = Item.ReturnPagesAsString;
 
-                string text = name + "-" + amount + "-" + cost + "-" + pages;
+                    string text = name + "-" + amount + "-" + cost + "-" + pages;
 
-                PlayerItemOutput[count] = text;
-
-                File.WriteAllLines("PlayerInventoryOut.txt", PlayerItemOutput);
+                    PlayerItemOutput[count] = text;
+                }
             }
 
             string[] StoreItemOutput = new string[StoreInventory.Store_Stock_Inventory.Count];
 
-            foreach (var Item in StoreInventory.Store_Stock_Inventory) {
+            for (int count = 0; count <= StoreItemOutput.Length; count++) {
 
-                int count = 0;
+                foreach (var Item in StoreInventory.Store_Stock_Inventory) {
 
-                string name = Item.Item_Name;
-                string amount = Item.ReturnAmountAsString;
-                string cost = Item.ReturnCostAsString;
-                string pages = Item.ReturnPagesAsString;
+                    string name = Item.Item_Name;
+                    string amount = Item.ReturnAmountAsString;
+                    string cost = Item.ReturnCostAsString;
+                    string pages = Item.ReturnPagesAsString;
 
-                string text = name + "-" + amount + "-" + cost + "-" + pages;
+                    string text = name + "-" + amount + "-" + cost + "-" + pages;
 
-                StoreItemOutput[count] = text;
-
-                File.WriteAllLines("StoreInventoryOut.txt", StoreItemOutput);
+                    StoreItemOutput[count] = text;
+                }
             }
+
+            File.WriteAllLines("PlayerInventoryOut.txt", PlayerItemOutput);
+
+            File.WriteAllLines("StoreInventoryOut.txt", StoreItemOutput);
         }
     }
 }
