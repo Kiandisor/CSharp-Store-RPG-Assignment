@@ -6,7 +6,7 @@ namespace Store_RPG_Assignment {
     /// <summary>
     /// Functions and variables for the super user
     /// </summary>
-    class Super_User {
+    public class Super_User {
 
         //Constructor of the super_user to create a new item for both inventories
         public Super_User() {
@@ -63,7 +63,17 @@ namespace Store_RPG_Assignment {
             if (CheckParse == true) {
 
                 CustomAmount = int.Parse(sChangeAmount);
-                return CustomAmount;
+
+                //Checks if the number is above 0
+                if (CustomAmount >= 0) {
+                    return CustomAmount;
+                }
+
+                //Asks for another input if the number is below 0
+                else {
+                    Console.WriteLine("Amount cannot be a number under 0.");
+                    return SetAmount();
+                }
             }
 
             //If not keep running the function until the user enters a valid input
@@ -91,14 +101,24 @@ namespace Store_RPG_Assignment {
             if (CheckParse == true) {
 
                 CustomCost = float.Parse(sChangeAmount);
-                return CustomCost;
+
+                //Checks if the number is above 0
+                if (CustomCost >= 0) {
+                    return CustomCost;
+                }
+
+                //Asks for another input if the number is below 0
+                else {
+                    Console.WriteLine("Cost cannot be a number under 0.");
+                    return SetCost();
+                }
             }
 
             //If not keep running the function until the user enters a valid input
             else {
 
                 Console.WriteLine("That was not a valid input. Please enter a number.");
-                return SetAmount();
+                return SetCost();
             }
         }
 
@@ -119,7 +139,17 @@ namespace Store_RPG_Assignment {
             if (CheckParse == true) {
 
                 CustomPages = int.Parse(sChangeAmount);
-                return CustomPages;
+
+                //Checks if the number is above 0
+                if (CustomPages >= 0) {
+                    return CustomPages;
+                }
+
+                //Asks for another input if the number is below 0
+                else {
+                    Console.WriteLine("Pages cannot be a number under 0.");
+                    return SetPages();
+                }
             }
 
             //If not keep running the function until the user enters a valid input

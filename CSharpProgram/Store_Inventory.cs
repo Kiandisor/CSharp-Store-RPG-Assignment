@@ -6,7 +6,7 @@ namespace Store_RPG_Assignment {
     /// <summary>
     /// The store inventory with functions inherited from the base inventory functions
     /// </summary>
-    class Store_Inventory_List : Base_Inventory {
+    public class Store_Inventory_List : Base_Inventory {
 
         /// <summary>
         /// List of "Inventory" objects

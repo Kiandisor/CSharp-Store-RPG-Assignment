@@ -6,7 +6,7 @@ namespace Store_RPG_Assignment {
     /// <summary>
     /// Base class for making an item
     /// </summary>
-    class Inventory_Item {
+    public class Inventory_Item {
 
         //Constructor for making an inventory item, must provide all fields to make an item
         public Inventory_Item(string name, int amount, float cost, int pages) {
@@ -59,7 +59,7 @@ namespace Store_RPG_Assignment {
     /// <summary>
     /// Holds the main functions to controlling the player and store inventory
     /// </summary>
-    class Base_Inventory {
+    public class Base_Inventory {
 
         /// <summary>
         /// String to hold the user choice on what to sort the list by

@@ -1,23 +1,24 @@
 ﻿using System;
+using System.Drawing;
 
 namespace Store_RPG_Assignment {
 
     /// <summary>
     /// Functions and variables for the main menu
     /// </summary>
-    class Menu {
+    public class Menu {
 
         /// <summary>
         /// Returns the Player name
         /// </summary>
         /// <returns></returns>
-        public string ReturnName { get; private set; } = "";
+        public string ReturnName { get; set; } = "";
 
         /// <summary>
         /// Returns the user choice for the main menu
         /// </summary>
         /// <returns></returns>
-        public string ReturnMenuUserChoice { get; private set; } = "";
+        public string ReturnMenuUserChoice { get; set; } = "";
 
         /// <summary>
         /// Ask for the users name
@@ -39,7 +40,9 @@ namespace Store_RPG_Assignment {
         /// Print out the main menu and get the user input
         /// </summary>
         public void ShowMainMenu() {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"Welcome to the trading game, {ReturnName}!");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("- Trade with the shop (trade)");
             Console.WriteLine("- View your Inventory (inventory)");

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Store_RPG_Assignment {
@@ -6,7 +7,7 @@ namespace Store_RPG_Assignment {
     /// <summary>
     /// Functions and variables to set up and control the game
     /// </summary>
-    class Game_Manager {
+    public class Game_Manager {
 
         //Default Constructor that sets up the inventories from the respective files
         public Game_Manager() {
@@ -178,7 +179,7 @@ namespace Store_RPG_Assignment {
                     TradeMenu.GetAmount();
 
                     TradeMenu.ChangeInventory(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory,
-                        TradeMenu.ReturnTradeUserChoice, TradeMenu.ReturnItemAmount, TradeMenu.ReturnTradeToChoice, ref UserInventory.Currency);
+                        TradeMenu.ReturnTradeUserChoice, TradeMenu.ReturnItemAmount, TradeMenu.TradeToChoice, ref UserInventory.Currency);
 
 
                     CurrentState = GameState.Menu;
