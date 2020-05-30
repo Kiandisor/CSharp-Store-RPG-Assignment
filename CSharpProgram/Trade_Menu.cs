@@ -169,6 +169,13 @@ namespace Store_RPG_Assignment {
         }
 
         /// <summary>
+        /// Tells the user they have no money to purchase anything
+        /// </summary>
+        public void NoCurrency() {
+            Console.WriteLine("You don't have any money to spend.");
+        }
+        
+        /// <summary>
         /// Prints out that there wasn't enough of the item in stock and changes the amount you wanted to the amount left in stock.
         /// </summary>
         /// <param name="AmountInInventory"></param>
@@ -178,6 +185,7 @@ namespace Store_RPG_Assignment {
         {
             //If the player wants to trade from the store
             if (PlayerOrStore==true) {
+                if () { }
                 Console.WriteLine($"You wanted to trade {amount} {ReturnTradeUserChoice} but the shop only had {AmountInInventory}.");
                 Console.WriteLine($"You ended up trading for the rest of their stock instead ({AmountInInventory}).");
 
@@ -229,16 +237,15 @@ namespace Store_RPG_Assignment {
         {
             //If the player trades from the store
             if (PlayerOrStore==true) {
+                    //Calculates the total cost
+                    CostOfItem*=amount;
 
-                //Calculates the total cost
-                CostOfItem*=amount;
+                    //Takes the amount of money from the player
+                    PlayerCurrency-=CostOfItem;
 
-                //Takes the amount of money from the player
-                PlayerCurrency-=CostOfItem;
-
-                //Takes the amount of items from the store
-                Console.WriteLine($"You have traded for {amount} {ReturnTradeUserChoice}(s).");
-                return AmountInInventory-=amount;
+                    //Takes the amount of items from the store
+                    Console.WriteLine($"You have traded for {amount} {ReturnTradeUserChoice}(s).");
+                    return AmountInInventory-=amount;
             }
             //If the player trades to the store
             else {
@@ -281,8 +288,14 @@ namespace Store_RPG_Assignment {
                         OutOfStock(To_Or_From);
                         break;
                     }
+                    //If the player currency is less than 0
+                    if (PlayerCurrency<0) {
+                        NoCurrency();
+                        break;
+                    }
                     //If the amount wanted is greater than the amount the inventory has trade for the remainder
-                    if (ChangeAmount>StoreValueChange.Item_Amount&&StoreValueChange.Item_Amount!=0) {
+                    if ((ChangeAmount>StoreValueChange.Item_Amount)&&(StoreValueChange.Item_Amount!=0)||
+                        (PlayerCurrency<ChangeAmount)) {
                         TradedRemainder(ref StoreValueChange.Item_Amount,Amount,To_Or_From,ref PlayerCurrency);
                         break;
                     }
@@ -313,7 +326,7 @@ namespace Store_RPG_Assignment {
                         break;
                     }
                     //If the amount wanted is greater than the amount the inventory has trade for the remainder
-                    if (ChangeAmount>PlayerValueChange.Item_Amount&&PlayerValueChange.Item_Amount!=0) {
+                    if ((ChangeAmount>PlayerValueChange.Item_Amount)&&(PlayerValueChange.Item_Amount!=0)) {
                         TradedRemainder(ref PlayerValueChange.Item_Amount,Amount,To_Or_From,ref PlayerCurrency);
                         break;
                     }
