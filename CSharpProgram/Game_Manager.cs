@@ -10,15 +10,16 @@ namespace Store_RPG_Assignment {
     public class Game_Manager {
 
         //Default Constructor that sets up the inventories from the respective files
-        public Game_Manager() {
+        public Game_Manager()
+        {
 
             //If both inventory files exist read from both of them and add them to the inventories
-            if (File.Exists("Player_Inventory.txt") == true && File.Exists("Store_Inventory.txt") == true) {
+            if (File.Exists("Player_Inventory.txt")==true&&File.Exists("Store_Inventory.txt")==true) {
 
                 //Read in the text from the Player_Inventory file
                 string[] PlayerItems = File.ReadAllLines("Player_Inventory.txt");
 
-                for (int Count = 0; Count < PlayerItems.Length; Count++) {
+                for (int Count = 0;Count<PlayerItems.Length;Count++) {
 
                     string[] ItemProperties = PlayerItems[Count].Split('-'); //Splits each line to the array
 
@@ -27,13 +28,13 @@ namespace Store_RPG_Assignment {
                     float cost = float.Parse(ItemProperties[2]); //Assigns the cost to the third string in the array
                     int pages = int.Parse(ItemProperties[3]); //Assigns the pages to the foourth string in the array
 
-                    UserInventory.Inventory.Add(new Inventory_Item(name, amount, cost, pages)); //Adds the item to the player inventory
+                    UserInventory.Inventory.Add(new Inventory_Item(name,amount,cost,pages)); //Adds the item to the player inventory
                 }
 
                 //Read in the text from the Store_Inventory file
                 string[] StoreItems = File.ReadAllLines("Store_Inventory.txt");
 
-                for (int Count = 0; Count < StoreItems.Length; Count++) {
+                for (int Count = 0;Count<StoreItems.Length;Count++) {
 
                     string[] ItemProperties = StoreItems[Count].Split('-'); //Splits each line to the array
 
@@ -42,7 +43,7 @@ namespace Store_RPG_Assignment {
                     float cost = float.Parse(ItemProperties[2]); //Assigns the cost to the third string in the array
                     int pages = int.Parse(ItemProperties[3]); //Assigns the pages to the fourth string in the array
 
-                    StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item(name, amount, cost, pages)); //Adds the item to the store inventory
+                    StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item(name,amount,cost,pages)); //Adds the item to the store inventory
                 }
             }
 
@@ -50,16 +51,16 @@ namespace Store_RPG_Assignment {
             else {
 
                 //Adds the default books to the player inventory
-                UserInventory.Inventory.Add(new Inventory_Item("art book", 0, 3.2f, 20));
-                UserInventory.Inventory.Add(new Inventory_Item("programming book", 0, 3.2f, 20));
-                UserInventory.Inventory.Add(new Inventory_Item("medic book", 0, 3.2f, 20));
-                UserInventory.Inventory.Add(new Inventory_Item("note book", 0, 3.2f, 20));
+                UserInventory.Inventory.Add(new Inventory_Item("art book",0,3.2f,20));
+                UserInventory.Inventory.Add(new Inventory_Item("programming book",0,3.2f,20));
+                UserInventory.Inventory.Add(new Inventory_Item("medic book",0,3.2f,20));
+                UserInventory.Inventory.Add(new Inventory_Item("note book",0,3.2f,20));
 
                 //Adds the default books to the store inventory
-                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item("art book", 15, 2.2f, 20));
-                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item("programming book", 15, 4.1f, 20));
-                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item("medic book", 15, 10.2f, 20));
-                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item("note book", 15, 1.5f, 20));
+                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item("art book",15,2.2f,20));
+                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item("programming book",15,4.1f,20));
+                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item("medic book",15,10.2f,20));
+                StoreInventory.Store_Stock_Inventory.Add(new Inventory_Item("note book",15,1.5f,20));
             }
         }
 
@@ -90,30 +91,32 @@ namespace Store_RPG_Assignment {
         /// <summary>
         /// Manages getting the player name
         /// </summary>
-        public void RunPlayerName() {
+        public void RunPlayerName()
+        {
 
             //Get the player name if there isn't one and the current state is 0/GetPlayerName
-            if (CurrentState == GameState.GetPlayerName) {
+            if (CurrentState==GameState.GetPlayerName) {
 
                 StartMenu.GetName();
 
-                CurrentState = GameState.Menu;
+                CurrentState=GameState.Menu;
 
             }
 
             //If there is a name then go straight to the menu
             else {
-                CurrentState = GameState.Menu;
+                CurrentState=GameState.Menu;
             }
         }
 
         /// <summary>
         /// Manages the Menu
         /// </summary>
-        public void RunMenu() {
+        public void RunMenu()
+        {
 
             //Run the game while the current state is menu 
-            while (CurrentState == GameState.Menu) {
+            while (CurrentState==GameState.Menu) {
                 Console.Clear();
                 StartMenu.ShowMainMenu();
 
@@ -122,20 +125,20 @@ namespace Store_RPG_Assignment {
                     case "trade":
                         //Open Trade Menu and clears the screen
                         Console.Clear();
-                        CurrentState = GameState.Trade;
+                        CurrentState=GameState.Trade;
                         //TradeMenu.ShowTradeMenu();
                         break;
 
                     case "inventory":
                         //Open User Invertory
                         Console.Clear();
-                        CurrentState = GameState.PlayerInventoryMenu;
+                        CurrentState=GameState.PlayerInventoryMenu;
                         break;
 
                     case "store":
                         //Open the store inventory
                         Console.Clear();
-                        CurrentState = GameState.StoreInventoryMenu;
+                        CurrentState=GameState.StoreInventoryMenu;
                         RunStoreInventory();
                         break;
 
@@ -146,12 +149,12 @@ namespace Store_RPG_Assignment {
 
                     case "exit":
                         //Quit the game
-                        CurrentState = GameState.Exit;
+                        CurrentState=GameState.Exit;
                         break;
 
                     case "super":
                         //Run the super user command
-                        CurrentState = GameState.SuperUser;
+                        CurrentState=GameState.SuperUser;
                         break;
 
                     default:
@@ -165,30 +168,31 @@ namespace Store_RPG_Assignment {
         /// <summary>
         /// Manages the Trade Menu
         /// </summary>
-        public void RunTradeMenu() {
+        public void RunTradeMenu()
+        {
 
             //Run the trade menu while the gamestate is trade
-            while (CurrentState == GameState.Trade) {
+            while (CurrentState==GameState.Trade) {
 
                 TradeMenu.GetItemChoice(StoreInventory.Store_Stock_Inventory);
 
-                if (TradeMenu.ReturnTradeUserChoice != "menu") {
+                if (TradeMenu.ReturnTradeUserChoice!="menu") {
 
                     TradeMenu.GetTo_Or_From();
 
                     TradeMenu.GetAmount();
 
-                    TradeMenu.ChangeInventory(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory,
-                        TradeMenu.ReturnTradeUserChoice, TradeMenu.ReturnItemAmount, TradeMenu.TradeToChoice, ref UserInventory.Currency);
+                    TradeMenu.ChangeInventory(ref UserInventory.Inventory,ref StoreInventory.Store_Stock_Inventory,
+                        TradeMenu.ReturnTradeUserChoice,TradeMenu.ReturnItemAmount,TradeMenu.TradeToChoice,ref UserInventory.Currency);
 
 
-                    CurrentState = GameState.Menu;
+                    CurrentState=GameState.Menu;
                 }
 
                 else {
 
                     Console.Clear();
-                    CurrentState = GameState.Menu;
+                    CurrentState=GameState.Menu;
                 }
             }
         }
@@ -196,8 +200,9 @@ namespace Store_RPG_Assignment {
         /// <summary>
         /// Manages the Player Inventory Menu
         /// </summary>
-        public void RunPlayerInventory() {
-            while (CurrentState == GameState.PlayerInventoryMenu) {
+        public void RunPlayerInventory()
+        {
+            while (CurrentState==GameState.PlayerInventoryMenu) {
 
                 UserInventory.SortListMenu();
 
@@ -223,7 +228,7 @@ namespace Store_RPG_Assignment {
 
                     case "menu":
                         Console.Clear();
-                        CurrentState = GameState.Menu;
+                        CurrentState=GameState.Menu;
                         break;
                 }
             }
@@ -232,8 +237,9 @@ namespace Store_RPG_Assignment {
         /// <summary>
         /// Manages the Store Inventory Menu
         /// </summary>
-        public void RunStoreInventory() {
-            while (CurrentState == GameState.StoreInventoryMenu) {
+        public void RunStoreInventory()
+        {
+            while (CurrentState==GameState.StoreInventoryMenu) {
 
                 StoreInventory.SortListMenu();
 
@@ -259,7 +265,7 @@ namespace Store_RPG_Assignment {
 
                     case "menu":
                         Console.Clear();
-                        CurrentState = GameState.Menu;
+                        CurrentState=GameState.Menu;
                         break;
                 }
             }
@@ -268,25 +274,27 @@ namespace Store_RPG_Assignment {
         /// <summary>
         /// Manages the Super User Menu
         /// </summary>
-        public void RunSuperUser() {
-            while (CurrentState == GameState.SuperUser) {
+        public void RunSuperUser()
+        {
+            while (CurrentState==GameState.SuperUser) {
 
                 Super_User NewItem = new Super_User();
 
-                NewItem.AddItemToInventories(ref UserInventory.Inventory, ref StoreInventory.Store_Stock_Inventory);
+                NewItem.AddItemToInventories(ref UserInventory.Inventory,ref StoreInventory.Store_Stock_Inventory);
 
-                CurrentState = GameState.Menu;
+                CurrentState=GameState.Menu;
             }
         }
-        
+
         /// <summary>
         /// Manages exiting the game and writing to the file
         /// </summary>
-        public void RunExitGame() {
+        public void RunExitGame()
+        {
 
             string[] PlayerItemOutput = new string[UserInventory.Inventory.Count];
 
-            for (int count = 1; count <= PlayerItemOutput.Length; count++) {
+            for (int count = 1;count<=PlayerItemOutput.Length;count++) {
 
                 foreach (var Item in UserInventory.Inventory) {
 
@@ -295,15 +303,15 @@ namespace Store_RPG_Assignment {
                     string cost = Item.ReturnCostAsString;
                     string pages = Item.ReturnPagesAsString;
 
-                    string text = name + "-" + amount + "-" + cost + "-" + pages;
+                    string text = name+"-"+amount+"-"+cost+"-"+pages;
 
-                    PlayerItemOutput[count] = text;
+                    PlayerItemOutput[count]=text;
                 }
             }
 
             string[] StoreItemOutput = new string[StoreInventory.Store_Stock_Inventory.Count];
 
-            for (int count = 0; count <= StoreItemOutput.Length; count++) {
+            for (int count = 0;count<=StoreItemOutput.Length;count++) {
 
                 foreach (var Item in StoreInventory.Store_Stock_Inventory) {
 
@@ -312,15 +320,15 @@ namespace Store_RPG_Assignment {
                     string cost = Item.ReturnCostAsString;
                     string pages = Item.ReturnPagesAsString;
 
-                    string text = name + "-" + amount + "-" + cost + "-" + pages;
+                    string text = name+"-"+amount+"-"+cost+"-"+pages;
 
-                    StoreItemOutput[count] = text;
+                    StoreItemOutput[count]=text;
                 }
             }
 
-            File.WriteAllLines("PlayerInventoryOut.txt", PlayerItemOutput);
+            File.WriteAllLines("PlayerInventoryOut.txt",PlayerItemOutput);
 
-            File.WriteAllLines("StoreInventoryOut.txt", StoreItemOutput);
+            File.WriteAllLines("StoreInventoryOut.txt",StoreItemOutput);
         }
     }
 }

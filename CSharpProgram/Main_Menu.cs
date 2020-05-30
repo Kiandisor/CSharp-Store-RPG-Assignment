@@ -23,26 +23,28 @@ namespace Store_RPG_Assignment {
         /// <summary>
         /// Ask for the users name
         /// </summary>
-        public void GetName() {
-            
+        public void GetName()
+        {
+
             Console.WriteLine("Greetings, what is your name? ");
-            ReturnName = Console.ReadLine();
+            ReturnName=Console.ReadLine();
 
             //while the user enters an empty name ask them for one
-            while (ReturnName == "") {
+            while (ReturnName=="") {
                 Console.Clear();
                 Console.WriteLine("Please enter a name:");
-                ReturnName = Console.ReadLine();
+                ReturnName=Console.ReadLine();
             }
         }
 
         /// <summary>
         /// Print out the main menu and get the user input
         /// </summary>
-        public void ShowMainMenu() {
-            Console.ForegroundColor = ConsoleColor.Red;
+        public void ShowMainMenu()
+        {
+            Console.ForegroundColor=ConsoleColor.Red;
             Console.WriteLine($"Welcome to the trading game, {ReturnName}!");
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor=ConsoleColor.White;
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("- Trade with the shop (trade)");
             Console.WriteLine("- View your Inventory (inventory)");
@@ -50,7 +52,7 @@ namespace Store_RPG_Assignment {
             Console.WriteLine("- Quit the game (exit)");
 
             //Get user input
-            ReturnMenuUserChoice = Console.ReadLine().ToLower();
+            ReturnMenuUserChoice=Console.ReadLine().ToLower();
         }
     }
 }

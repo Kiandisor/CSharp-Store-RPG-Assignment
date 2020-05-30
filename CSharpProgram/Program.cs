@@ -4,7 +4,8 @@
     /// Base Program
     /// </summary>
     class Program {
-        static void Main() {
+        static void Main()
+        {
             //Initialize Game Manager
             Game_Manager PlayGame = new Game_Manager();
 
@@ -12,7 +13,7 @@
             bool RunGame = true;
 
             //Run the loop until the player wants to exit
-            while (RunGame != false) {
+            while (RunGame!=false) {
 
                 switch (PlayGame.CurrentState) {
 
@@ -33,7 +34,7 @@
 
                     //Show the players inventory
                     case Game_Manager.GameState.PlayerInventoryMenu:
-                        PlayGame.RunPlayerInventory(); 
+                        PlayGame.RunPlayerInventory();
                         break;
 
                     //Show the stores inventory
@@ -44,9 +45,9 @@
                     //Exit the game
                     case Game_Manager.GameState.Exit:
                         PlayGame.RunExitGame();
-                        RunGame = false;
+                        RunGame=false;
                         break;
-                    
+
                     //Accsess the super user
                     case Game_Manager.GameState.SuperUser:
                         PlayGame.RunSuperUser();
