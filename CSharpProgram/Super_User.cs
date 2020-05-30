@@ -7,23 +7,20 @@ namespace Store_RPG_Assignment {
     /// Functions and variables for the super user
     /// </summary>
     public class Super_User {
-
         //Constructor of the super_user to create a new item for both inventories
         public Super_User()
         {
-
             CustomName=SetName();
             CustomAmount=SetAmount();
             CustomCost=SetCost();
             CustomPages=SetPages();
-            ;
         }
 
-        string CustomName = "";
-        int CustomAmount = 0;
-        float CustomCost = 0f;
-        int CustomPages = 0;
-
+        private string CustomName = "";
+        private int CustomAmount = 0;
+        private float CustomCost = 0f;
+        private int CustomPages = 0;
+        
         /// <summary>
         /// Adds the new item creaded to both inventories
         /// </summary>
@@ -42,7 +39,6 @@ namespace Store_RPG_Assignment {
         /// <returns></returns>
         public string SetName()
         {
-
             Console.WriteLine("Enter the name for the new book: ");
 
             string Name = Console.ReadLine();
@@ -56,7 +52,6 @@ namespace Store_RPG_Assignment {
         /// <returns></returns>
         public int SetAmount()
         {
-
             Console.WriteLine($"How many {CustomName}(s) should the store and player start with?");
 
             //Gets the users amount
@@ -66,24 +61,20 @@ namespace Store_RPG_Assignment {
             bool CheckParse = int.TryParse(sChangeAmount,out CustomAmount);
             //If it can be parsed, set the ChangeAmount to the value of the string
             if (CheckParse==true) {
-
                 CustomAmount=int.Parse(sChangeAmount);
 
                 //Checks if the number is above 0
                 if (CustomAmount>=0) {
                     return CustomAmount;
                 }
-
                 //Asks for another input if the number is below 0
                 else {
                     Console.WriteLine("Amount cannot be a number under 0.");
                     return SetAmount();
                 }
             }
-
             //If not keep running the function until the user enters a valid input
-            else {
-
+            else { 
                 Console.WriteLine("That was not a valid input. Please enter a number.");
                 return SetAmount();
             }
@@ -95,7 +86,6 @@ namespace Store_RPG_Assignment {
         /// <returns></returns>
         public float SetCost()
         {
-
             Console.WriteLine($"What will the cost of {CustomName} be?");
 
             //Gets the users amount
@@ -105,24 +95,20 @@ namespace Store_RPG_Assignment {
             bool CheckParse = float.TryParse(sChangeAmount,out CustomCost);
             //If it can be parsed, set the ChangeAmount to the value of the string
             if (CheckParse==true) {
-
                 CustomCost=float.Parse(sChangeAmount);
 
                 //Checks if the number is above 0
                 if (CustomCost>=0) {
                     return CustomCost;
                 }
-
                 //Asks for another input if the number is below 0
                 else {
                     Console.WriteLine("Cost cannot be a number under 0.");
                     return SetCost();
                 }
             }
-
             //If not keep running the function until the user enters a valid input
             else {
-
                 Console.WriteLine("That was not a valid input. Please enter a number.");
                 return SetCost();
             }
@@ -134,7 +120,6 @@ namespace Store_RPG_Assignment {
         /// <returns></returns>
         public int SetPages()
         {
-
             Console.WriteLine($"How many pages will {CustomName} have?");
 
             //Gets the users amount
@@ -144,21 +129,18 @@ namespace Store_RPG_Assignment {
             bool CheckParse = int.TryParse(sChangeAmount,out CustomPages);
             //If it can be parsed, set the ChangeAmount to the value of the string
             if (CheckParse==true) {
-
                 CustomPages=int.Parse(sChangeAmount);
 
                 //Checks if the number is above 0
                 if (CustomPages>=0) {
                     return CustomPages;
                 }
-
                 //Asks for another input if the number is below 0
                 else {
                     Console.WriteLine("Pages cannot be a number under 0.");
                     return SetPages();
                 }
             }
-
             //If not keep running the function until the user enters a valid input
             else {
 

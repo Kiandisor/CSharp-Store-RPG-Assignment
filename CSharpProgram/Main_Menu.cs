@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Drawing;
 
 namespace Store_RPG_Assignment {
-
     /// <summary>
     /// Functions and variables for the main menu
     /// </summary>
     public class Menu {
-
         /// <summary>
         /// Returns the Player name
         /// </summary>
@@ -25,7 +22,6 @@ namespace Store_RPG_Assignment {
         /// </summary>
         public void GetName()
         {
-
             Console.WriteLine("Greetings, what is your name? ");
             ReturnName=Console.ReadLine();
 

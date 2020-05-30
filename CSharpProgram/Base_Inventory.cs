@@ -2,22 +2,18 @@
 using System.Collections.Generic;
 
 namespace Store_RPG_Assignment {
-
     /// <summary>
     /// Base class for making an item
     /// </summary>
     public class Inventory_Item {
-
         //Constructor for making an inventory item, must provide all fields to make an item
         public Inventory_Item(string name,int amount,float cost,int pages)
         {
-
             Item_Name=name;
             Item_Amount=amount;
             Item_Cost=cost;
             Item_Pages=pages;
         }
-
         //Variables for an item
         //String for Item Name
         public string Item_Name;
@@ -33,7 +29,7 @@ namespace Store_RPG_Assignment {
         /// </summary>
         public string ReturnNameAsString
         {
-            get { return Item_Name.ToString(); }
+            get {return Item_Name.ToString();}
         }
 
         /// <summary>
@@ -41,7 +37,7 @@ namespace Store_RPG_Assignment {
         /// </summary>
         public string ReturnAmountAsString
         {
-            get { return Item_Amount.ToString(); }
+            get {return Item_Amount.ToString();}
         }
 
         /// <summary>
@@ -49,7 +45,7 @@ namespace Store_RPG_Assignment {
         /// </summary>
         public string ReturnCostAsString
         {
-            get { return Item_Cost.ToString(); }
+            get {return Item_Cost.ToString();}
         }
 
         /// <summary>
@@ -57,7 +53,7 @@ namespace Store_RPG_Assignment {
         /// </summary>
         public string ReturnPagesAsString
         {
-            get { return Item_Pages.ToString(); }
+            get {return Item_Pages.ToString();}
         }
     }
 
@@ -65,7 +61,6 @@ namespace Store_RPG_Assignment {
     /// Holds the main functions to controlling the player and store inventory
     /// </summary>
     public class Base_Inventory {
-
         /// <summary>
         /// String to hold the user choice on what to sort the list by
         /// </summary>
@@ -73,6 +68,11 @@ namespace Store_RPG_Assignment {
 
         //Currency of the player which changes depending on trades
         public float Currency = 35.0f;
+
+        /// <summary>
+        /// Returns the user sort choice
+        /// </summary>
+        public string ReturnSortInventory() {return SortChoice;}
 
         /// <summary>
         /// Virtual function that can be changed. Prints all the objects currently in the inventory
@@ -89,7 +89,6 @@ namespace Store_RPG_Assignment {
                     "Pages: "+Item.Item_Pages
                 );
             }
-
             Console.WriteLine($"Current Money: ${Currency}");
             Console.WriteLine();
         }
@@ -110,21 +109,11 @@ namespace Store_RPG_Assignment {
         }
 
         /// <summary>
-        /// Returns the user sort choice
-        /// </summary>
-        public string ReturnSortInventory()
-        {
-
-            return SortChoice;
-        }
-
-        /// <summary>
         /// Sort List by amount owned
         /// </summary>
         /// <param name="ListToSort"></param>
         public void SortByAmountOwned(ref List<Inventory_Item> ListToSort)
         {
-
             ListToSort.Sort((x,y) => x.Item_Amount.CompareTo(y.Item_Amount));
         }
 
@@ -134,7 +123,6 @@ namespace Store_RPG_Assignment {
         /// <param name="ListToSort"></param>
         public void SortByItemName(ref List<Inventory_Item> ListToSort)
         {
-
             ListToSort.Sort((x,y) => x.Item_Name.CompareTo(y.Item_Name));
         }
 
@@ -144,7 +132,6 @@ namespace Store_RPG_Assignment {
         /// <param name="ListToSort"></param>
         public void SortByItemPages(ref List<Inventory_Item> ListToSort)
         {
-
             ListToSort.Sort((x,y) => x.Item_Pages.CompareTo(y.Item_Pages));
         }
     }

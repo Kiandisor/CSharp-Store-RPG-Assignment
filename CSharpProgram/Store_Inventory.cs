@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 
 namespace Store_RPG_Assignment {
-
     /// <summary>
     /// The store inventory with functions inherited from the base inventory functions
     /// </summary>
     public class Store_Inventory_List:Base_Inventory {
-
         /// <summary>
         /// List of "Inventory" objects
         /// </summary>
         public List<Inventory_Item> Store_Stock_Inventory = new List<Inventory_Item>();
-
         /// <summary>
         /// Overides the PrintInventory function in Base_Inventory to not show the currency the store has
         /// </summary>
@@ -26,10 +23,8 @@ namespace Store_RPG_Assignment {
                                   "Cost: "+Item.Item_Cost+" | "+
                                   "Pages: "+Item.Item_Pages);
             }
-
             Console.WriteLine();
         }
-
         //Default books:
         //Art Book
         //Programming Book
