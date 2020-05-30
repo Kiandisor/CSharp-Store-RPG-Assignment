@@ -129,9 +129,7 @@ namespace Store_RPG_Assignment {
             Console.WriteLine("- From the store (from)");
 
             //String to hold the users choice
-            string STradeToChoice = "";
-
-            STradeToChoice=Console.ReadLine().ToLower();
+            string STradeToChoice=Console.ReadLine().ToLower();
 
             //Switch statement to decide if the input is valid or not. Will set the bool for if the player is trading to the store or from it
             switch (STradeToChoice) {

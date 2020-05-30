@@ -11,13 +11,13 @@ namespace Store_RPG_Unit_Tests {
         [TestMethod]
         public void Test()
         {
-            Assert.AreEqual();
+            //Assert.AreEqual();
         }
 
         [TestMethod]
-        public void Test()
+        public void TestOne()
         {
-            Assert.AreEqual();
+            //Assert.AreEqual();
         }
     }
 }
