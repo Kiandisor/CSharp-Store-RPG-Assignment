@@ -85,7 +85,6 @@ namespace Store_RPG_Assignment {
                 Console.WriteLine(
                     "Name: "+Item.Item_Name+" | "+
                     "Amount: "+Item.Item_Amount+" | "+
-                    "Cost: "+Item.Item_Cost+" | "+
                     "Pages: "+Item.Item_Pages
                 );
             }

@@ -29,12 +29,34 @@ namespace Store_RPG_Unit_Tests {
         [TestMethod]
         public void TestTradeRemainder()
         {
+            //Variables for first assert
+            TestTradeMenu.CostOfItem=10.2f;
+            TestTradeMenu.ChangeAmount=3;
+            TestTradeMenu.TradeToChoice=true;
+            float currency = 3.4f;
+            int InventoryAmount = 2;
+
+            //The this will pass because you cant trade anything if the total cost of it is above the players money
+            Assert.AreEqual(TestTradeMenu.TradedRemainder(ref InventoryAmount,TestTradeMenu.ChangeAmount,TestTradeMenu.TradeToChoice,ref currency),0);
+
+            //Variables for second assert
             TestTradeMenu.CostOfItem=3.2f;
             TestTradeMenu.ChangeAmount=3;
             TestTradeMenu.TradeToChoice=true;
-            float currency = 20f;
-            int InventoryAmount = 2;
+            currency=4.4f;
+            InventoryAmount=2;
 
+            //The this will pass because total cost of the items is below the players money amount
+            Assert.AreEqual(TestTradeMenu.TradedRemainder(ref InventoryAmount,TestTradeMenu.ChangeAmount,TestTradeMenu.TradeToChoice,ref currency),0);
+
+            //Variables for third assert
+            TestTradeMenu.CostOfItem=3.2f;
+            TestTradeMenu.ChangeAmount=3;
+            TestTradeMenu.TradeToChoice=true;
+            currency=35.4f;
+            InventoryAmount=2;
+
+            //The this will pass because total cost of the items is below the players money amount
             Assert.AreEqual(TestTradeMenu.TradedRemainder(ref InventoryAmount,TestTradeMenu.ChangeAmount,TestTradeMenu.TradeToChoice,ref currency),0);
         }
 
@@ -42,7 +64,35 @@ namespace Store_RPG_Unit_Tests {
         /// Test method for the get to or from function
         /// </summary>
         [TestMethod]
-        public void TestGetToOrFrom()
-        {}
+        public void TestGetTo_Or_From()
+        {
+            //Variable for assert
+            string STradeToChoice = "to";
+
+            switch (STradeToChoice) {
+                case "to":
+                    TestTradeMenu.TradeToChoice=true;
+                    Assert.AreEqual(TestTradeMenu.TradeToChoice,true);
+                    break;
+                case "from":
+                    TestTradeMenu.TradeToChoice=false;
+                    Assert.AreEqual(TestTradeMenu.TradeToChoice,false);
+                    break;
+            }
+
+            STradeToChoice = "from";
+            switch (STradeToChoice) {
+                //Player is trading to the store
+                case "to":
+                    TestTradeMenu.TradeToChoice=true;
+                    Assert.AreEqual(TestTradeMenu.TradeToChoice,true);
+                    break;
+                //Player is trading from the store
+                case "from":
+                    TestTradeMenu.TradeToChoice=false;
+                    Assert.AreEqual(TestTradeMenu.TradeToChoice,false);
+                    break;
+            }
+        }
     }
 }

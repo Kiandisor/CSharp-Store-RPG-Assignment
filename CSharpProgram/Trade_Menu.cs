@@ -184,24 +184,31 @@ namespace Store_RPG_Assignment {
         public int TradedRemainder(ref int AmountInInventory,int amount,bool PlayerOrStore,ref float PlayerCurrency)
         {
             //If the player wants to trade from the store
-            if (PlayerOrStore==true) {
-                if () { }
-                Console.WriteLine($"You wanted to trade {amount} {ReturnTradeUserChoice} but the shop only had {AmountInInventory}.");
-                Console.WriteLine($"You ended up trading for the rest of their stock instead ({AmountInInventory}).");
-
-                Console.WriteLine();
-
-                //Sets the amount to be traded to the amount in the store inventory
-                amount=AmountInInventory;
-
+            if (PlayerOrStore==true) { 
                 //Sets the Cost of the item equal to the amount x the cost 
                 CostOfItem*=amount;
+                //If the player's money is more than the cost of the items trade the remainder
+                if (PlayerCurrency>CostOfItem) {
+                    Console.WriteLine($"You wanted to trade {amount} {ReturnTradeUserChoice} but the shop only had {AmountInInventory}.");
+                    Console.WriteLine($"You ended up trading for the rest of their stock instead ({AmountInInventory}).");
 
-                //Takes the remainder of the currency from the player
-                PlayerCurrency-=CostOfItem;
+                    Console.WriteLine();
 
-                //Takes the remainder of the items in the store inventory
-                return AmountInInventory-=amount;
+                    //Sets the amount to be traded to the amount in the store inventory
+                    ChangeAmount=AmountInInventory;
+
+                    //Takes the remainder of the currency from the player
+                    PlayerCurrency-=CostOfItem;
+
+                    //Takes the remainder of the items in the store inventory
+                    return AmountInInventory-=ChangeAmount;
+                }
+                //Don't trade anything because the player's money is too low
+                else {
+                    Console.WriteLine($"You wanted to trade {amount} {ReturnTradeUserChoice} but you didn't have the money to get {AmountInInventory}.");
+
+                    return 0;
+                }
             }
             //If the player wants to trade to the store
             else {
@@ -248,10 +255,7 @@ namespace Store_RPG_Assignment {
                     return AmountInInventory-=amount;
             }
             //If the player trades to the store
-            else {
-
-                //Takes the amount of items from the player
-                AmountInInventory-=amount;
+            else { 
                 Console.WriteLine($"You have traded back {amount} {ReturnTradeUserChoice}(s).");
 
                 //Calculates the total cost
@@ -294,8 +298,8 @@ namespace Store_RPG_Assignment {
                         break;
                     }
                     //If the amount wanted is greater than the amount the inventory has trade for the remainder
-                    if ((ChangeAmount>StoreValueChange.Item_Amount)&&(StoreValueChange.Item_Amount!=0)||
-                        (PlayerCurrency<ChangeAmount)) {
+                    //Or the players currency is less than the amount wanted
+                    if ((ChangeAmount>StoreValueChange.Item_Amount)&&(StoreValueChange.Item_Amount!=0)) {
                         TradedRemainder(ref StoreValueChange.Item_Amount,Amount,To_Or_From,ref PlayerCurrency);
                         break;
                     }
@@ -337,7 +341,7 @@ namespace Store_RPG_Assignment {
                 }
                 //Check each item in the inventory until the user choice is the same as the inventory item
                 foreach (var ItemValueChange in StoreChange) {
-                    //Add the change amount to the user inventory
+                    //Add the change amount to the store inventory
                     if (ReturnTradeUserChoice==ItemValueChange.Item_Name) {
                         ItemValueChange.Item_Amount+=ChangeAmount;
                     }
