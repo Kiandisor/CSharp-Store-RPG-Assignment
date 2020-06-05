@@ -79,20 +79,6 @@ namespace Store_RPG_Unit_Tests {
                     Assert.AreEqual(TestTradeMenu.TradeToChoice,false);
                     break;
             }
-
-            STradeToChoice = "from";
-            switch (STradeToChoice) {
-                //Player is trading to the store
-                case "to":
-                    TestTradeMenu.TradeToChoice=true;
-                    Assert.AreEqual(TestTradeMenu.TradeToChoice,true);
-                    break;
-                //Player is trading from the store
-                case "from":
-                    TestTradeMenu.TradeToChoice=false;
-                    Assert.AreEqual(TestTradeMenu.TradeToChoice,false);
-                    break;
-            }
         }
     }
 }

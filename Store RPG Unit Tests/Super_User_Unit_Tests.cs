@@ -6,18 +6,30 @@ namespace Store_RPG_Unit_Tests {
     [TestClass]
     public class Super_User_Unit_Tests {
 
-        Super_User TestSuperUser = new Super_User();
+        Super_User TestSuperUser = new Super_User("Book",3,13.4f,20);
 
         [TestMethod]
-        public void Test()
-        {
-            //Assert.AreEqual();
+        public void TestSetPages()
+        {   
+            Assert.AreEqual(TestSuperUser.CustomPages,20);
         }
 
         [TestMethod]
-        public void TestOne()
+        public void TestSetName()
         {
-            //Assert.AreEqual();
+            Assert.AreEqual(TestSuperUser.CustomName,"Book");
+        }
+
+        [TestMethod]
+        public void TestSetCost()
+        {
+            Assert.AreEqual(TestSuperUser.CustomCost, 13.4f);
+        }
+
+        [TestMethod]
+        public void TestSetAmount()
+        {
+            Assert.AreEqual(TestSuperUser.CustomAmount,3);
         }
     }
 }

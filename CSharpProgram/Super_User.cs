@@ -16,10 +16,19 @@ namespace Store_RPG_Assignment {
             CustomPages=SetPages();
         }
 
-        private string CustomName = "";
-        private int CustomAmount = 0;
-        private float CustomCost = 0f;
-        private int CustomPages = 0;
+        //Constructor for unit test
+        public Super_User(string newName,int newAmount,float newCost,int newPages)
+        {
+            CustomName=newName;
+            CustomAmount=newAmount;
+            CustomCost=newCost;
+            CustomPages=newPages;
+        }
+
+        public string CustomName = "";
+        public int CustomAmount = 0;
+        public float CustomCost = 0f;
+        public int CustomPages = 0;
         
         /// <summary>
         /// Adds the new item creaded to both inventories
@@ -92,7 +101,7 @@ namespace Store_RPG_Assignment {
             string sChangeAmount = Console.ReadLine();
 
             //Bool to check if the users input can be parsed to a float
-            bool CheckParse = float.TryParse(sChangeAmount,out CustomCost);
+            bool CheckParse = float.TryParse(sChangeAmount, out CustomCost);
             //If it can be parsed, set the ChangeAmount to the value of the string
             if (CheckParse==true) {
                 CustomCost=float.Parse(sChangeAmount);

@@ -7,11 +7,15 @@ namespace Store_RPG_Unit_Tests {
     public class Base_Inventory_Unit_Tests {
 
         Base_Inventory TestBaseInventory = new Base_Inventory();
+        Inventory_Item TestItem = new Inventory_Item("Test",10,10.5f,10);
 
         [TestMethod]
-        public void Test()
+        public void TestItemProperties()
         {
-            //Assert.AreEqual();
+            Assert.AreEqual(TestItem.Item_Name,"Test");
+            Assert.AreEqual(TestItem.Item_Amount,10);
+            Assert.AreEqual(TestItem.Item_Cost,10.5f);
+            Assert.AreEqual(TestItem.Item_Pages,10);
         }
 
         [TestMethod]
