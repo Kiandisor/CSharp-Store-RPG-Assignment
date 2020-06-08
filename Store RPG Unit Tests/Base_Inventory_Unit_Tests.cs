@@ -19,6 +19,20 @@ namespace Store_RPG_Unit_Tests {
         }
 
         [TestMethod]
+        public void TestItemPropertiesToString()
+        {
+            string name = TestItem.ReturnNameAsString;
+            string amount = TestItem.ReturnAmountAsString;
+            string cost = TestItem.ReturnCostAsString;
+            string pages = TestItem.ReturnPagesAsString;
+
+            Assert.AreEqual(name,"Test");
+            Assert.AreEqual(amount,"10");
+            Assert.AreEqual(cost,"10.5");
+            Assert.AreEqual(pages,"10");
+        }
+
+        [TestMethod]
         public void TestOne()
         {
             //Assert.AreEqual();

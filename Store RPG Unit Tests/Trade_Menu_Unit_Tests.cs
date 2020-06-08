@@ -5,7 +5,6 @@ using System.ComponentModel;
 namespace Store_RPG_Unit_Tests {
     [TestClass]
     public class Trade_Menu_Unit_Tests {
-
         Trading_Menu TestTradeMenu = new Trading_Menu();
 
         /// <summary>
