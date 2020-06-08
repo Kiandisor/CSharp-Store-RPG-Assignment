@@ -5,8 +5,6 @@ using System.ComponentModel;
 namespace Store_RPG_Unit_Tests {
     [TestClass]
     public class Base_Inventory_Unit_Tests {
-
-        Base_Inventory TestBaseInventory = new Base_Inventory();
         Inventory_Item TestItem = new Inventory_Item("Test",10,10.5f,10);
 
         [TestMethod]
@@ -30,12 +28,6 @@ namespace Store_RPG_Unit_Tests {
             Assert.AreEqual(amount,"10");
             Assert.AreEqual(cost,"10.5");
             Assert.AreEqual(pages,"10");
-        }
-
-        [TestMethod]
-        public void TestOne()
-        {
-            //Assert.AreEqual();
         }
     }
 }
