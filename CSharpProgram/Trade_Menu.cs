@@ -159,12 +159,14 @@ namespace Store_RPG_Assignment {
                 Console.Clear();
                 Console.WriteLine($"The {ReturnTradeUserChoice} is currently out of stock.");
                 Console.WriteLine();
+                Console.ReadKey();
             }
             //If the player wants to trade to the store
             else {
                 Console.Clear();
                 Console.WriteLine($"You don't have any {ReturnTradeUserChoice}s.");
                 Console.WriteLine();
+                Console.ReadKey();
             }
         }
 
@@ -173,6 +175,7 @@ namespace Store_RPG_Assignment {
         /// </summary>
         public void NoCurrency() {
             Console.WriteLine("You don't have any money to spend.");
+            Console.ReadKey();
         }
         
         /// <summary>
@@ -194,6 +197,8 @@ namespace Store_RPG_Assignment {
 
                     Console.WriteLine();
 
+                    Console.ReadKey();
+
                     //Sets the amount to be traded to the amount in the store inventory
                     ChangeAmount=AmountInInventory;
 
@@ -206,7 +211,7 @@ namespace Store_RPG_Assignment {
                 //Don't trade anything because the player's money is too low
                 else {
                     Console.WriteLine($"You wanted to trade {amount} {ReturnTradeUserChoice} but you didn't have the money to get {AmountInInventory}.");
-
+                    Console.ReadKey();
                     return 0;
                 }
             }
@@ -216,6 +221,8 @@ namespace Store_RPG_Assignment {
                 Console.WriteLine($"You ended up trading the rest of the {ReturnTradeUserChoice}(s) you had.");
 
                 Console.WriteLine();
+
+                Console.ReadKey();
 
                 //Sets the amount to be traded to the amount in the Player inventory
                 amount=AmountInInventory;
@@ -252,6 +259,7 @@ namespace Store_RPG_Assignment {
 
                     //Takes the amount of items from the store
                     Console.WriteLine($"You have traded for {amount} {ReturnTradeUserChoice}(s).");
+                    Console.ReadKey();
                     return AmountInInventory-=amount;
             }
             //If the player trades to the store
@@ -266,6 +274,7 @@ namespace Store_RPG_Assignment {
 
                 //Takes the amount of items from the player
                 Console.WriteLine($"You have traded back {amount} {ReturnTradeUserChoice}(s).");
+                Console.ReadKey();
                 return AmountInInventory-=amount;
             }
         }

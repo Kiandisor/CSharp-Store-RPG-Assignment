@@ -17,11 +17,5 @@ namespace Store_RPG_Unit_Tests {
             Assert.AreEqual(TestItem.Item_Cost,10.5f);
             Assert.AreEqual(TestItem.Item_Pages,10);
         }
-
-        [TestMethod]
-        public void TestOne()
-        {
-            //Assert.AreEqual();
-        }
     }
 }

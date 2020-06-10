@@ -11,9 +11,9 @@ namespace Store_RPG_Assignment {
         public Game_Manager()
         {
             //If both inventory files exist read from both of them and add them to the inventories
-            if (File.Exists("Player_Inventory.txt")==true&&File.Exists("Store_Inventory.txt")==true) {
+            if (File.Exists("PlayerInventory.txt")==true&&File.Exists("StoreInventory.txt")==true) {
                 //Read in the text from the Player_Inventory file
-                string[] PlayerItems = File.ReadAllLines("Player_Inventory.txt");
+                string[] PlayerItems = File.ReadAllLines("PlayerInventory.txt");
 
                 for (int Count = 0;Count<PlayerItems.Length;Count++) {
                     string[] ItemProperties = PlayerItems[Count].Split('-'); //Splits each line to the array
@@ -26,7 +26,7 @@ namespace Store_RPG_Assignment {
                     UserInventory.Inventory.Add(new Inventory_Item(name,amount,cost,pages)); //Adds the item to the player inventory
                 }
                 //Read in the text from the Store_Inventory file
-                string[] StoreItems = File.ReadAllLines("Store_Inventory.txt");
+                string[] StoreItems = File.ReadAllLines("StoreInventory.txt");
 
                 for (int Count = 0;Count<StoreItems.Length;Count++) {
                     string[] ItemProperties = StoreItems[Count].Split('-'); //Splits each line to the array
@@ -257,37 +257,56 @@ namespace Store_RPG_Assignment {
         /// </summary>
         public void RunExitGame()
         {
+            //Create array for the items in the player inventory
             string[] PlayerItemOutput = new string[UserInventory.Inventory.Count];
+            //Counter for the foreach loops
+            int count = 0;
 
-            for (int count = 1;count<=PlayerItemOutput.Length;count++) {
-                foreach (var Item in UserInventory.Inventory) {
-                    string name = Item.ReturnNameAsString;
-                    string amount = Item.ReturnAmountAsString;
-                    string cost = Item.ReturnCostAsString;
-                    string pages = Item.ReturnPagesAsString;
+            foreach (var Item in UserInventory.Inventory) {
+                //Create a string that holds the items name
+                string name = Item.ReturnNameAsString;
+                //Create a string that holds the items amount
+                string amount = Item.ReturnAmountAsString;
+                //Create a string that holds the items cost
+                string cost = Item.ReturnCostAsString;
+                //Create a string that holds the items pages
+                string pages = Item.ReturnPagesAsString;
 
-                    string text = name+"-"+amount+"-"+cost+"-"+pages;
+                //Create a string that formats the item to be put in the txt file
+                string text = name+"-"+amount+"-"+cost+"-"+pages;
 
-                    PlayerItemOutput[count]=text;
-                }
+                //Add the text to the index in the array
+                PlayerItemOutput[count]=text;
+                //Increment the counter
+                ++count;
             }
 
+            //Create array for the items in the store inventory
             string[] StoreItemOutput = new string[StoreInventory.Store_Stock_Inventory.Count];
+            //Reset the counter to 0
+            count=0;
+            
+            foreach (var Item in StoreInventory.Store_Stock_Inventory) {
+                //Create a string that holds the items name
+                string name = Item.Item_Name;
+                //Create a string that holds the items amount
+                string amount = Item.ReturnAmountAsString;
+                //Create a string that holds the items cost
+                string cost = Item.ReturnCostAsString;
+                //Create a string that holds the items pages
+                string pages = Item.ReturnPagesAsString;
 
-            for (int count = 0;count<=StoreItemOutput.Length;count++) {
-                foreach (var Item in StoreInventory.Store_Stock_Inventory) {
-                    string name = Item.Item_Name;
-                    string amount = Item.ReturnAmountAsString;
-                    string cost = Item.ReturnCostAsString;
-                    string pages = Item.ReturnPagesAsString;
+                //Create a string that formats the item to be put in the txt file
+                string text = name+"-"+amount+"-"+cost+"-"+pages;
 
-                    string text = name+"-"+amount+"-"+cost+"-"+pages;
-
-                    StoreItemOutput[count]=text;
-                }
+                //Add the text to the index in the array
+                StoreItemOutput[count]=text;
+                //Increment the counter
+                ++count;
             }
-            File.WriteAllLines("PlayerInventoryOut.txt",PlayerItemOutput);
-            File.WriteAllLines("StoreInventoryOut.txt",StoreItemOutput);
+            //Write both arrays to the respective files
+            File.WriteAllLines("PlayerInventory.txt",PlayerItemOutput);
+            File.WriteAllLines("StoreInventory.txt",StoreItemOutput);
         }
     }
 }

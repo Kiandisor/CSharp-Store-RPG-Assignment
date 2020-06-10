@@ -16,7 +16,7 @@ namespace Store_RPG_Assignment {
             CustomPages=SetPages();
         }
 
-        //Constructor for unit test
+        //Constructor that takes each variable
         public Super_User(string newName,int newAmount,float newCost,int newPages)
         {
             CustomName=newName;
