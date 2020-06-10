@@ -5,7 +5,6 @@ using System.ComponentModel;
 namespace Store_RPG_Unit_Tests {
     [TestClass]
     public class Super_User_Unit_Tests {
-
         Super_User TestSuperUser = new Super_User("Book",3,13.4f,20);
 
         [TestMethod]
