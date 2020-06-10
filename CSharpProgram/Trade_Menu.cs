@@ -175,7 +175,6 @@ namespace Store_RPG_Assignment {
         /// </summary>
         public void NoCurrency() {
             Console.WriteLine("You don't have any money to spend.");
-            Console.ReadKey();
         }
         
         /// <summary>
@@ -197,8 +196,6 @@ namespace Store_RPG_Assignment {
 
                     Console.WriteLine();
 
-                    Console.ReadKey();
-
                     //Sets the amount to be traded to the amount in the store inventory
                     ChangeAmount=AmountInInventory;
 
@@ -211,7 +208,6 @@ namespace Store_RPG_Assignment {
                 //Don't trade anything because the player's money is too low
                 else {
                     Console.WriteLine($"You wanted to trade {amount} {ReturnTradeUserChoice} but you didn't have the money to get {AmountInInventory}.");
-                    Console.ReadKey();
                     return 0;
                 }
             }
@@ -221,8 +217,6 @@ namespace Store_RPG_Assignment {
                 Console.WriteLine($"You ended up trading the rest of the {ReturnTradeUserChoice}(s) you had.");
 
                 Console.WriteLine();
-
-                Console.ReadKey();
 
                 //Sets the amount to be traded to the amount in the Player inventory
                 amount=AmountInInventory;
@@ -259,7 +253,7 @@ namespace Store_RPG_Assignment {
 
                     //Takes the amount of items from the store
                     Console.WriteLine($"You have traded for {amount} {ReturnTradeUserChoice}(s).");
-                    Console.ReadKey();
+
                     return AmountInInventory-=amount;
             }
             //If the player trades to the store
@@ -274,7 +268,7 @@ namespace Store_RPG_Assignment {
 
                 //Takes the amount of items from the player
                 Console.WriteLine($"You have traded back {amount} {ReturnTradeUserChoice}(s).");
-                Console.ReadKey();
+
                 return AmountInInventory-=amount;
             }
         }
@@ -299,22 +293,26 @@ namespace Store_RPG_Assignment {
                     //If there are no items then it is out of stock
                     if (StoreValueChange.Item_Amount==0) {
                         OutOfStock(To_Or_From);
+                        Console.ReadKey();
                         break;
                     }
                     //If the player currency is less than 0
                     if (PlayerCurrency<0) {
                         NoCurrency();
+                        Console.ReadKey();
                         break;
                     }
                     //If the amount wanted is greater than the amount the inventory has trade for the remainder
                     //Or the players currency is less than the amount wanted
                     if ((ChangeAmount>StoreValueChange.Item_Amount)&&(StoreValueChange.Item_Amount!=0)) {
                         TradedRemainder(ref StoreValueChange.Item_Amount,Amount,To_Or_From,ref PlayerCurrency);
+                        Console.ReadKey();
                         break;
                     }
                     //If the user choice is the in the list, trade the item
                     else {
                         PurchaseItem(ref StoreValueChange.Item_Amount,Amount,To_Or_From,ref PlayerCurrency);
+                        Console.ReadKey();
                     }
                 }
                 //Check each item in the inventory until the user choice is the same as the inventory item
@@ -336,16 +334,19 @@ namespace Store_RPG_Assignment {
                     //If there are no items then it is out of stock
                     if (PlayerValueChange.Item_Amount==0) {
                         OutOfStock(To_Or_From);
+                        Console.ReadKey();
                         break;
                     }
                     //If the amount wanted is greater than the amount the inventory has trade for the remainder
                     if ((ChangeAmount>PlayerValueChange.Item_Amount)&&(PlayerValueChange.Item_Amount!=0)) {
                         TradedRemainder(ref PlayerValueChange.Item_Amount,Amount,To_Or_From,ref PlayerCurrency);
+                        Console.ReadKey();
                         break;
                     }
                     //If the user choice is the in the list, trade the item
                     else {
                         PurchaseItem(ref PlayerValueChange.Item_Amount,Amount,To_Or_From,ref PlayerCurrency);
+                        Console.ReadKey();
                     }
                 }
                 //Check each item in the inventory until the user choice is the same as the inventory item
